@@ -9,7 +9,6 @@ on:
       - master
   workflow_dispatch:
 
-
 jobs:
 
   build-test:
@@ -25,25 +24,30 @@ jobs:
           distribution: 'corretto'
           java-version: 19
 
+      - name: Debug file structure
+        run: |
+          echo "Current working directory:"
+          pwd
+          echo "Listing all files in the repository:"
+          ls -R
+
       - name: Download ANTLR
         run: |
           curl -o antlr-4.13.0-complete.jar https://www.antlr.org/download/antlr-4.13.0-complete.jar
 
       - name: Search and Generate Lexer and Parser for all .g4 files
         run: |
-          echo "Searching for .g4 files in src/main/java..."
-          files=$(find src/main/java -type f -name "*.g4")
+          echo "Searching for .g4 files in the entire project..."
+          files=$(find . -type f -name "*.g4")
           if [ -z "$files" ]; then
             echo "No .g4 files found. Exiting..."
             exit 1
           fi
           echo "Found .g4 files:"
-          echo "$files"
           for file in $files; do
             echo "Processing $file..."
             java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar "$file"
           done
-        working-directory: .
 
       - name: Build Application (Gradle)
         run: ./gradlew build --no-daemon
