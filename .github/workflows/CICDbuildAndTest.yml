@@ -56,7 +56,7 @@ jobs:
       - name: Log in to DockerHub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.TOKEN_DOCKER_TESTMITGRADLE }}
+          DOCKER_TOKEN: ${{ secrets.TOKEN_DOCKER_TESTMITGRADLE2 }}
         run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
       - name: Build Docker Image
