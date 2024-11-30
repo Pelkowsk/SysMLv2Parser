@@ -1,4 +1,4 @@
-name: CICDTest
+name: CICD-BuildAndTest
 
 on:
   push:
@@ -27,9 +27,12 @@ jobs:
         run: |
           curl -o antlr-4.13.0-complete.jar https://www.antlr.org/download/antlr-4.13.0-complete.jar
 
-      - name: Generate Lexer and Parser
+      - name: Generate Lexer and Parser for all .g4 files
         run: |
-          java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar src/main/java/sysmlv2beispiel.g4
+          for file in $(find src/main/java -type f -name "*.g4"); do
+            echo "Processing $file..."
+            java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar "$file"
+          done
         working-directory: .
 
       - name: Build Application (Gradle)
@@ -66,4 +69,3 @@ jobs:
       - name: Verify Docker Image
         run: |
           echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
-
