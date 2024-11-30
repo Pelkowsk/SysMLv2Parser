@@ -1,0 +1,87 @@
+name: scancode
+
+on: [push, pull_request]
+
+jobs:
+  license-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Compliance Script
+        uses: actions/checkout@v4
+        with:
+          repository: Pelkowsk/TestMitGradle
+          path: compliance-scripts
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install ScanCode
+        run: pip install scancode-toolkit
+
+      #debug
+      - name: Aktuelles Arbeitsverzeichnis anzeigen
+        run: pwd
+
+      #debug
+      - name: Verzeichnisinhalt auflisten
+        run: ls -la
+
+      - name: Enable Debug Logging
+        run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
+      - name: Find relevant paths
+        run: python find_relevant_files.py
+        working-directory: ${{ github.workspace }}
+
+      #debug
+      - name: Inhalt von ignore_paths.txt anzeigen
+        run: cat ${{ github.workspace }}/ignore_paths.txt
+
+      - name: Check if ignore_paths.txt exists
+        run: |
+          if [ -f ignore_paths.txt ]; then
+            echo "ignore_paths.txt wurde erfolgreich erstellt."
+          else
+            echo "Fehler: ignore_paths.txt wurde nicht erstellt."
+            exit 1
+          fi
+
+      #debug
+      - name: Display contents of ignore_paths.txt
+        run: cat ignore_paths.txt
+
+      - name: Run ScanCode
+        run: |
+          ignore_args=$(awk '{print "--ignore \"" $0 "\""}' ignore_paths.txt | tr '\n' ' ')
+          scancode --license $ignore_args --json-pp scancode-results.json .
+
+      - name: Check License Compliance
+        run: python check_license_compliance.py
+
+      - name: Upload ScanCode Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scancode-report
+          path: scancode-results.json
+
+      - name: Upload Compliance Check Result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-check-result
+          path: compliance_check_result.txt
