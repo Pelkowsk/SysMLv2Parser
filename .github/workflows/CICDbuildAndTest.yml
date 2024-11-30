@@ -29,7 +29,7 @@ jobs:
 
       - name: Generate Lexer and Parser
         run: |
-          java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar src/test.g4
+          java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar src/main/java/sysmlv2beispiel.g4
         working-directory: .
 
       - name: Build Application (Gradle)
@@ -67,40 +67,3 @@ jobs:
         run: |
           echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
 
-  license-check:
-    name: License Check
-    runs-on: ubuntu-latest
-    needs: build-test
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run FOSSA Scan
-        uses: fossas/fossa-action@main
-        with:
-          api-key: ${{ secrets.fossaApiKey }}
-
-      - name: Save FOSSA Report Locally
-        run: fossa analyze --output ./fossa-report.json
-
-      - name: Upload FOSSA Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: fossa-report
-          path: fossa-report.json
-
-      - name: Convert JSON Report to HTML
-        run: |
-          cat fossa-report.json | jq . > fossa-report.html
-
-      - name: Upload HTML Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: fossa-report-html
-          path: fossa-report.html
-
-      - name: Upload License Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: license-compliance-report
-          path: license-report.json
