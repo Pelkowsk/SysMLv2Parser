@@ -1,0 +1,80 @@
+name: CICD-BuildAndTest
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+
+  build-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 19
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: 19
+
+      - name: Download ANTLR
+        run: |
+          curl -o antlr-4.13.0-complete.jar https://www.antlr.org/download/antlr-4.13.0-complete.jar
+
+      - name: Search and Generate Lexer and Parser for all .g4 files
+        run: |
+          echo "Searching for .g4 files in src/main/java..."
+          files=$(find src/main/java -type f -name "*.g4")
+          if [ -z "$files" ]; then
+            echo "No .g4 files found. Exiting..."
+            exit 1
+          fi
+          echo "Found .g4 files:"
+          echo "$files"
+          for file in $files; do
+            echo "Processing $file..."
+            java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar "$file"
+          done
+        working-directory: .
+
+      - name: Build Application (Gradle)
+        run: ./gradlew build --no-daemon
+
+      - name: Test Application (Gradle)
+        run: ./gradlew test --no-daemon
+
+      - name: Set Timestamp
+        id: timestamp
+        run: echo "TIMESTAMP=$(date +'%h-%d-%m_%Y-%M-%S')" >> $GITHUB_ENV
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ github.run_id }}-${{ env.TIMESTAMP }}
+          path: build/reports/tests/test
+
+      - name: Log in to DockerHub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.TOKEN_DOCKER_TESTMITGRADLE2 }}
+        run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker tag ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
+
+      - name: Verify Docker Image
+        run: |
+          echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
