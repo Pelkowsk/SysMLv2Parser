@@ -21,15 +21,15 @@ jobs:
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'corretto'
+          distribution: 'temurin'
           java-version: 17
 
-      - name: Debug file structure
-        run: |
-          echo "Current working directory:"
-          pwd
-          echo "Listing all files in the repository:"
-          ls -R
+     # - name: Debug file structure
+      #  run: |
+       #   echo "Current working directory:"
+        #  pwd
+         # echo "Listing all files in the repository:"
+          #ls -R
 
       - name: Download ANTLR
         run: |

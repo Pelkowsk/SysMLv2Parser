@@ -33,7 +33,6 @@ sourceSets {
     }
     test {
         java {
-            // Zugriff auf die generierten Quellen auch für Tests
             srcDirs(tasks.generateGrammarSource.get().outputDirectory)
         }
     }
