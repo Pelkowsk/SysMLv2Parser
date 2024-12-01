@@ -3,10 +3,23 @@ import sys
 import subprocess
 import json
 
-# Liste der verbotenen Lizenzen
-PROHIBITED_LICENSES = {"afl-3.0", "apache-2.0", "artistic-1.0", "bittorrent-1.0", "bittorrent-1.1", "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0", "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0", "cc-by-nc-nd-4.0", "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5", "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0", "cc-by-nd-1.0", "cc-by-nd-2.0", "cc-by-nd-2.5", "cc-by-nd-3.0", "cc-by-nd-4.0", "cc-by-sa-1.0", "cc-by-sa-2.0", "cc-by-sa-2.5", "cc-by-sa-3.0", "cc-by-sa-4.0", "cddl-1.0", "cddl-1.1", "cecill-2.0", "cecill-b", "cecill-c", "cpal-1.0", "cpl-1.0", "ecl-1.0", "ecl-2.0", "epl-1.0", "epl-2.0", "eupl-1.0", "eupl-1.1", "eupl-1.2", "gpl-1.0", "gpl-2.0", "gpl-2.0+", "gpl-2.0-only", "gpl-2.0-or-later", "gpl-3.0", "gpl-3.0-only", "gpl-3.0-or-later", "ibm-pibs", "ipl-1.0", "isc", "lppl-1.3c", "mit", "mpl-1.0", "mpl-1.1", "mpl-2.0", "ms-pl", "ms-rl", "ncsa", "ofl-1.1", "osl-1.0", "osl-2.0", "osl-2.1", "osl-3.0", "php-3.0", "postgresql", "qpl-1.0", "sleepycat", "unlicense", "upl-1.0", "vim", "wtfpl", "zlib"
-
-                       }
+# Liste der mit der LGPLv3 inkompatiblen Lizenzen
+PROHIBITED_LICENSES = {
+    "afl-3.0", "apache-2.0", "artistic-1.0", "bittorrent-1.0", "bittorrent-1.1",
+    "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
+    "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0", "cc-by-nc-nd-4.0",
+    "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5", "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0",
+    "cc-by-nd-1.0", "cc-by-nd-2.0", "cc-by-nd-2.5", "cc-by-nd-3.0", "cc-by-nd-4.0",
+    "cddl-1.0", "cddl-1.1", "cecill-2.0", "cecill-b", "cecill-c", "cpal-1.0", "cpl-1.0",
+    "ecl-1.0", "ecl-2.0", "epl-1.0", "epl-2.0", "eupl-1.0", "eupl-1.1", "eupl-1.2",
+    "gpl-1.0", "gpl-2.0", "gpl-2.0+", "gpl-2.0-only", "gpl-2.0-or-later", "gpl-3.0",
+    "gpl-3.0-only", "gpl-3.0-or-later", "ibm-pibs", "ipl-1.0", "isc", "lgpl-2.0",
+    "lgpl-2.0+", "lgpl-2.0-only", "lgpl-2.0-or-later", "lgpl-2.1", "lgpl-2.1+",
+    "lgpl-2.1-only", "lgpl-2.1-or-later", "lppl-1.3c", "mit", "mpl-1.0", "mpl-1.1",
+    "mpl-2.0", "ms-pl", "ms-rl", "ncsa", "ofl-1.1", "osl-1.0", "osl-2.0", "osl-2.1",
+    "osl-3.0", "php-3.0", "postgresql", "qpl-1.0", "sleepycat", "unlicense", "upl-1.0",
+    "vim", "wtfpl", "zlib"
+}
 
 # Erwarteter Lizenzheader
 REQUIRED_LICENSE_HEADER = """/*****************************************************************************
@@ -90,17 +103,6 @@ def main():
 
         # Überprüfen des Lizenzheaders
         try:
-            with open(g4_file, "r", encoding="utf-8") as f:
-                file_content = f.read()
-                if REQUIRED_LICENSE_HEADER not in file_content:
-                    print(f"Erforderlicher Lizenzheader in {g4_file} nicht gefunden.")
-                    sys.exit(1)
-        except Exception as e:
-            print(f"Fehler beim Lesen der Datei {g4_file}: {e}")
-            sys.exit(1)
 
-    print("Alle .g4-Dateien entsprechen den Lizenzanforderungen.")
-    sys.exit(0)
+::contentReference[oaicite:0]{index=0}
 
-if __name__ == "__main__":
-    main()
