@@ -66,13 +66,12 @@ jobs:
           name: test-results-${{ github.run_id }}-${{ env.TIMESTAMP }}
           path: build/reports/tests/test
 
-      - name: Log in to DockerHub without storing credentials
+      - name: Log in to DockerHub (Suppress Warning)
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-        run: |
-          mkdir -p /tmp/.docker
-          docker --config /tmp/.docker login -u "$DOCKER_USERNAME" --password-stdin <<< "$DOCKER_TOKEN"
+        run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin 2>/dev/null
+
 
 
       - name: Build Docker Image
