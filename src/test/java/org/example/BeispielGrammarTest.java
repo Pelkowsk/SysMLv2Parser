@@ -12,7 +12,7 @@ public class BeispielGrammarTest {
 
     @Test
     public void testValidInput() {
-        String input = "dein gültiger Eingabetext hier";
+        String input = "1+2";
         beispielLexer lexer = new beispielLexer(CharStreams.fromString(input));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         beispielParser parser = new beispielParser(tokens);

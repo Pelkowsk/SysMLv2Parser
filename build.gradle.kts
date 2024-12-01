@@ -18,29 +18,37 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 }
 
+// Konfiguration der generateGrammarSource-Task
 tasks.generateGrammarSource {
     arguments = listOf("-visitor", "-listener", "-package", "org.example")
     outputDirectory = file("build/generated/sources/antlr/main/org/example")
 }
 
+// Aufnahme der generierten Quellen in die Source-Sets
 sourceSets {
     main {
-        java.srcDir(tasks.generateGrammarSource.get().outputDirectory)
+        java {
+            srcDirs(tasks.generateGrammarSource.get().outputDirectory)
+        }
     }
-    test{
-        java.srcDir("src/test/org.example")
+    test {
+        java {
+            // Zugriff auf die generierten Quellen auch für Tests
+            srcDirs(tasks.generateGrammarSource.get().outputDirectory)
+        }
     }
 }
 
-
-
+// Sicherstellen, dass die generierten Quellen vor dem Kompilieren bereitstehen
 tasks.named<JavaCompile>("compileJava") {
     dependsOn(tasks.named("generateGrammarSource"))
-    source(fileTree("src/main/java/org/example"))
 }
 
+// Sicherstellen, dass Tests nach der Generierung der Quellen laufen
 tasks.test {
     useJUnitPlatform()
+    dependsOn(tasks.named("generateGrammarSource"))
 }
 
+// Standard-Tasks definieren
 defaultTasks("clean", "build")
