@@ -69,7 +69,7 @@ jobs:
       - name: Log in to DockerHub (Suppress Warning)
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          DOCKER_TOKEN: ${{ secrets.TOKEN_DOCKER_TESTMITGRADLE2 }}
         run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin 2>/dev/null
 
 
