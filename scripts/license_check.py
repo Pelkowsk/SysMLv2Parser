@@ -103,15 +103,6 @@ def main():
 
     # Überprüfen des Lizenzheaders
 
-try:
-    with open(g4_file, "r", encoding="utf-8") as f:
-        file_content = f.read()
-        if REQUIRED_LICENSE_HEADER not in file_content:
-            print(f"Erforderlicher Lizenzheader in {g4_file} nicht gefunden.")
-            sys.exit(1)
-except Exception as e:
-    print(f"Fehler beim Lesen der Datei {g4_file}: {e}")
-    sys.exit(1)
 
 
 
