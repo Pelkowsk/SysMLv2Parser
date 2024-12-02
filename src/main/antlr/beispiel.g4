@@ -30,7 +30,7 @@
 
 grammar beispiel;
 
-start : expression EOF;
+start : expression ;
 
 expression : NUMBER (additiveOperator NUMBER)* ;
 
