@@ -25,7 +25,7 @@
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- *
+ * lgpl-2.0-or-later
  *****************************************************************************/
 
 grammar beispiel;
