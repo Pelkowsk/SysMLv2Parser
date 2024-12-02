@@ -13,9 +13,9 @@ PROHIBITED_LICENSES = {
     "cddl-1.0", "cddl-1.1", "cecill-2.0", "cecill-b", "cecill-c", "cpal-1.0", "cpl-1.0",
     "ecl-1.0", "ecl-2.0", "epl-1.0", "epl-2.0", "eupl-1.0", "eupl-1.1", "eupl-1.2",
     "gpl-1.0", "gpl-2.0", "gpl-2.0+", "gpl-2.0-only", "gpl-2.0-or-later", "gpl-3.0",
-    "gpl-3.0-only", "gpl-3.0-or-later", "ibm-pibs", "ipl-1.0", "isc", "lgpl-2.0",
-    "lgpl-2.0+", "lgpl-2.0-only", "lgpl-2.0-or-later", "lgpl-2.1", "lgpl-2.1+",
-    "lgpl-2.1-only", "lgpl-2.1-or-later", "lppl-1.3c", "mit", "mpl-1.0", "mpl-1.1",
+    "gpl-3.0-only", "gpl-3.0-or-later", "ibm-pibs", "ipl-1.0", "isc", "lgpl-2.0"
+    , "lgpl-2.0-only", "lgpl-2.0-or-later", "lgpl-2.1",
+    "lgpl-2.1-only", "lppl-1.3c", "mit", "mpl-1.0", "mpl-1.1",
     "mpl-2.0", "ms-pl", "ms-rl", "ncsa", "ofl-1.1", "osl-1.0", "osl-2.0", "osl-2.1",
     "osl-3.0", "php-3.0", "postgresql", "qpl-1.0", "sleepycat", "unlicense", "upl-1.0",
     "vim", "wtfpl", "zlib"
