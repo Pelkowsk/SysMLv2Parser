@@ -28,7 +28,7 @@ REQUIRED_LICENSE_HEADER = """/**************************************************
  * Copyright (c) 2018 IncQuery Labs Ltd.
  * Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
  * Copyright (c) 2019 Mgnite Inc.
- *    
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -43,13 +43,13 @@ REQUIRED_LICENSE_HEADER = """/**************************************************
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * @license LGPL-3.0-or-later <http://spdx.org/licenses/LGPL-3.0-or-later>
- * 
+ *
  * Contributors:
  *  Ed Seidewitz, MDS
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- * 
+ *
  *****************************************************************************/"""
 
 def main():
@@ -85,6 +85,33 @@ def main():
             sys.exit(1)
 
         # Speichern der Scan-Ergebnisse als Textdatei für Debugging-Zwecke
-        debug_text_file = f
-::contentReference[oaicite:0]{index=0}
+        debug_text_file = f"{g4_file}_license_scan.txt"
+        try:
+            with open(debug_text_file, "w", encoding="utf-8") as f:
+                json.dump(scan_data, f, ensure_ascii=False, indent=4)
+        except Exception as e:
+            print(f"Fehler beim Speichern der Debug-Textdatei {debug_text_file}: {e}")
+            sys.exit(1)
+
+        # Überprüfen auf verbotene Lizenzen
+        for file_data in scan_data.get("files", []):
+            for license_detection in file_data.get("license_detections", []):
+                license_expression = license_detection.get("license_expression", "")
+                if any(prohibited in license_expression for prohibited in PROHIBITED_LICENSES):
+                    print(f"Verbotene Lizenz in {g4_file} gefunden: {license_expression}")
+                    sys.exit(1)
+
+    # Überprüfen des Lizenzheaders
+try:
+    with open(g4_file, "r", encoding="utf-8") as f:
+        file_content = f.read()
+        if REQUIRED_LICENSE_HEADER not in file_content:
+            print(f"Erforderlicher Lizenzheader in {g4_file} nicht gefunden.")
+            sys.exit(1)
+except Exception as e:
+    print(f"Fehler beim Lesen der Datei {g4_file}: {e}")
+    sys.exit(1)
+
+
+
 
