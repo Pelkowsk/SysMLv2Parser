@@ -93,15 +93,6 @@ def main():
             print(f"Fehler beim Speichern der Debug-Textdatei {debug_text_file}: {e}")
             sys.exit(1)
 
-        # Überprüfen des Lizenzheaders
-        try:
-    with open(g4_file, "r", encoding="utf-8") as f:
-        file_content = f.read()
-        if REQUIRED_LICENSE_HEADER not in file_content:
-            print(f"Erforderlicher Lizenzheader in {g4_file} nicht gefunden.")
-            sys.exit(1)
-except Exception as e:
-
         # Überprüfen auf verbotene Lizenzen
         for file_data in scan_data.get("files", []):
             for license_detection in file_data.get("license_detections", []):
@@ -110,8 +101,17 @@ except Exception as e:
                     print(f"Verbotene Lizenz in {g4_file} gefunden: {license_expression}")
                     sys.exit(1)
 
+    # Überprüfen des Lizenzheaders
 
-
+try:
+    with open(g4_file, "r", encoding="utf-8") as f:
+        file_content = f.read()
+        if REQUIRED_LICENSE_HEADER not in file_content:
+            print(f"Erforderlicher Lizenzheader in {g4_file} nicht gefunden.")
+            sys.exit(1)
+except Exception as e:
+    print(f"Fehler beim Lesen der Datei {g4_file}: {e}")
+    sys.exit(1)
 
 
 
