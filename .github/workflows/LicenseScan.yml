@@ -66,14 +66,14 @@ jobs:
       - name: Run ScanCode Toolkit on .g4 files
         if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
-          scancode --json-pp "$SCANCODE_RESULTS_DIR/scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
+          scancode --json-pp "$GITHUB_WORKSPACE/scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
       - name: Upload ScanCode reports
         uses: actions/upload-artifact@v4
         with:
           name: scancode-reports
-          path: $SCANCODE_RESULTS_DIR/
+          path: $GITHUB_WORKSPACE/scancode_results.json
 
       - name: Check for .g4 files
         id: check_g4_files
