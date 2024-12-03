@@ -153,13 +153,13 @@ jobs:
         run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest .
 
       - name: Push Docker Image
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest
 
       - name: Verify Docker Image
         run: |
-          echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
+          echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest"
