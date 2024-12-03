@@ -94,6 +94,13 @@ def run_license_scan(files):
         write_debug_log(f"Fehler beim Lizenzscan: {str(e)}")
         return None
 
+    # Nach dem Ausführen des ScanCode-Scans und dem Speichern in 'result.json'
+if os.path.exists("result.json"):
+    write_debug_log("Die Datei 'result.json' wurde erfolgreich erstellt.")
+else:
+    write_debug_log("Fehler: Die Datei 'result.json' wurde nicht gefunden.")
+
+
 def check_licenses(scan_results):
     """
     Überprüft die Scan-Ergebnisse auf verbotene Lizenzen.
@@ -160,3 +167,9 @@ if __name__ == "__main__":
     with open(DEBUG_FILE, "w") as log_file:
         log_file.write("Debug-Log gestartet\n")
     main()
+
+# Nach dem ersten Aufruf von write_debug_log
+if os.path.exists("debug_log.txt"):
+    write_debug_log("Die Datei 'debug_log.txt' wurde erfolgreich erstellt.")
+else:
+    write_debug_log("Fehler: Die Datei 'debug_log.txt' wurde nicht gefunden.")
