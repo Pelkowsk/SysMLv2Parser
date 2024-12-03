@@ -34,10 +34,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Scancode-log
-          path: script/result.json
+          path: result.json
 
       - name: Upload Debug Log
         uses: actions/upload-artifact@v4
         with:
           name: debug-log
-          path: script/debug_log.txt
+          path: debug_log.txt
