@@ -124,15 +124,20 @@ def main():
 
 # Ergebnisbericht erstellen
 report = {
-    "files under prohibited licenses": prohibited_files,
+    "files with prohibited licenses": prohibited_files,
     "files with missing project license header": header_missing_files,
-    "please insert this project license header in files above (missing project license header)": REQUIRED_HEADER,
     "status": "success" if not prohibited_files and not header_missing_files else "failure"
 
 
 }
 
-# Ergebnisbericht speichern
+# Hinzufügen von Instruktionen und dem erwarteten Lizenz-Header, falls fehlende Header existieren
+if header_missing_files:
+    report["instruction"] = "Please copy this license header into the listed files above (missing project header):"
+    report["expected_license_header"] = REQUIRED_HEADER
+
+
+    # Ergebnisbericht speichern
     with open("license_and_header_check_report.json", "w") as f:
         json.dump(report, f, indent=2)
 
