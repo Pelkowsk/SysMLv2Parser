@@ -146,6 +146,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Build Application (Gradle)
+        run: ./gradlew build --no-daemon
+
       - name: Log in to DockerHub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -157,10 +160,10 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
 
       - name: Verify Docker Image
         run: |
-          echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser2:latest"
+          echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
 
