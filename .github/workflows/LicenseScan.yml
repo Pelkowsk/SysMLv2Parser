@@ -102,4 +102,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: license-and-header-check-report
-          path: $GITHUB_WORKSPACE/license_and_header_check_report.json
+          path: license_and_header_check_report.json
