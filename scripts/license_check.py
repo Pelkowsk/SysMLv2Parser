@@ -14,6 +14,15 @@ PROHIBITED_LICENSES = {
 # Erwarteter Header (als String)
 REQUIRED_HEADER = """[Ihr erwarteter Header-Text hier]"""
 
+scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
+if not os.path.exists(scancode_results_dir):
+    print(f"Fehler: Verzeichnis '{scancode_results_dir}' wurde nicht gefunden.")
+    sys.exit(1)
+
+if not os.listdir(scancode_results_dir):
+    print(f"Warnung: Verzeichnis '{scancode_results_dir}' ist leer. Keine Scan-Ergebnisse vorhanden.")
+    sys.exit(0)
+
 def load_scancode_results(scancode_results_dir):
     """
     Lädt alle ScanCode-Ergebnisse aus dem angegebenen Verzeichnis.

@@ -65,7 +65,16 @@ jobs:
           name: scancode-reports
           path: $SCANCODE_RESULTS_DIR/
 
+      - name: Check for .g4 files
+        id: check_g4_files
+        run: |
+          if [ "${{ steps.find_g4_files.outputs.files_found }}" == "false" ]; then
+            echo "Keine .g4-Dateien gefunden. Überspringe Lizenzprüfung."
+            exit 0
+          fi
+
       - name: Run check for license and specific header
+        if: steps.find_g4_files.outputs.files_found == 'true'
         run: python3 scripts/license_check.py
 
 
