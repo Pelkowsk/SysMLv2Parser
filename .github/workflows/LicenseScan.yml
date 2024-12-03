@@ -36,12 +36,11 @@ jobs:
           echo "Anzahl der gefundenen .g4-Dateien: $file_count"
           # Setze den Output-Wert 'files_found' entsprechend
           if [ "$file_count" -gt 0 ]; then
-          echo "::set-output name=files_found::true"
+            echo "files_found=true" >> "$GITHUB_OUTPUT"
           else
-          echo "::set-output name=files_found::false"
+            echo "files_found=false" >> "$GITHUB_OUTPUT"
           fi
-          shell: bash
-    
+        shell: bash
 
       - name: Run ScanCode Toolkit on .g4 files
         if: steps.find_g4_files.outputs.files_found == 'true'
@@ -52,12 +51,11 @@ jobs:
           done < g4_files.txt
         shell: bash
 
-
       - name: Run check for license and specific header
         run: |
           python3 scripts/license_check.py
         env:
-          G4_FILES_LIST: ${{ steps.find_g4_files.outputs.g4_files }}
+          G4_FILES_LIST: ${{ steps.find_g4_files.outputs.files_found }}
           SCANCODE_RESULTS_DIR: $GITHUB_WORKSPACE/scancode_results
 
       - name: Upload ScanCode reports
@@ -71,4 +69,3 @@ jobs:
         with:
           name: g4-files-list
           path: g4_files.txt
-
