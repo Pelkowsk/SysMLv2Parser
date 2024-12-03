@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.example.*;
+
 
 
 
@@ -15,9 +15,9 @@ public class BeispielGrammarTest {
         String input = "1+2";
 
 
-        beispielLexer lexer = new beispielLexer(CharStreams.fromString(input));
+        omg.beispielLexer lexer = new omg.beispielLexer(CharStreams.fromString(input));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        beispielParser parser = new beispielParser(tokens);
+        omg.beispielParser parser = new omg.beispielParser(tokens);
 
         ParseTree tree = parser.start(); // Ersetze 'start' durch die tatsächliche Startregel deiner Grammatik
         assertEquals(0, parser.getNumberOfSyntaxErrors(), "Es sollten keine Syntaxfehler vorhanden sein.");
@@ -26,9 +26,9 @@ public class BeispielGrammarTest {
     @Test
     public void testInvalidInput() {
         String input = "1+2+a";
-        beispielLexer lexer = new beispielLexer(CharStreams.fromString(input));
+        omg.beispielLexer lexer = new omg.beispielLexer(CharStreams.fromString(input));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        beispielParser parser = new beispielParser(tokens);
+        omg.beispielParser parser = new omg.beispielParser(tokens);
 
         parser.start(); // Ersetze 'start' durch die tatsächliche Startregel deiner Grammatik
         assertTrue(parser.getNumberOfSyntaxErrors() > 0, "Es sollten Syntaxfehler vorhanden sein."); // Korrektur hier

@@ -20,8 +20,8 @@ dependencies {
 
 // Konfiguration der generateGrammarSource-Task
 tasks.generateGrammarSource {
-    arguments = listOf("-visitor", "-listener", "-package", "org.example")
-    outputDirectory = file("build/generated/sources/antlr/main/org/example")
+    arguments.addAll( listOf("-visitor", "-no-listener", "-package", "omg"))
+    //outputDirectory = file("build/generated/sources/antlr/main/org/excample")
 }
 
 // Aufnahme der generierten Quellen in die Source-Sets
