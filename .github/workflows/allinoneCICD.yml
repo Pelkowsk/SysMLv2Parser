@@ -117,6 +117,12 @@ jobs:
           name: scancode-reports
           path: ./scancode_results.json
 
+      - name: Create scancode_results directory
+        run: mkdir -p $GITHUB_WORKSPACE/scancode_results
+
+      - name: Move ScanCode report to scancode_results directory
+        run: mv $GITHUB_WORKSPACE/scancode_results.json $GITHUB_WORKSPACE/scancode_results/
+
       - name: Run license and header check script
         run: python3 scripts/license_check.py
 
