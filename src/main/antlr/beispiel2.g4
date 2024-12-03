@@ -7,7 +7,7 @@ expression : NUMBER (additiveOperator NUMBER)* ;
 additiveOperator : '+'
                   | '-' ;
 
-NUMBER : '-'? [0-9]+ ;
+NUMBER :  [0-9]+ ;
 
 WS : [ \t\r\n]+ -> skip ;
 
