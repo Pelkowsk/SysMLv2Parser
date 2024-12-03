@@ -3,10 +3,10 @@ name: License and Header Check
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   license_and_header_check:
