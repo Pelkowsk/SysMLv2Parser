@@ -20,7 +20,7 @@ dependencies {
 
 // Konfiguration der generateGrammarSource-Task
 tasks.generateGrammarSource {
-    arguments.addAll( listOf("-visitor", "-no-listener", "-package", "omg"))
+    arguments.addAll( listOf("-visitor", "-listener", "-package", "omg"))
     //outputDirectory = file("build/generated/sources/antlr/main/org/excample")
 }
 

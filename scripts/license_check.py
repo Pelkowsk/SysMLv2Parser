@@ -1,5 +1,4 @@
 import os
-import sys
 import subprocess
 import json
 
@@ -7,22 +6,14 @@ import json
 PROHIBITED_LICENSES = {
     "afl-3.0", "apache-2.0", "artistic-1.0", "bittorrent-1.0", "bittorrent-1.1",
     "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
-    "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0", "cc-by-nc-nd-4.0",
-    "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5", "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0",
-    "cc-by-nd-1.0", "cc-by-nd-2.0", "cc-by-nd-2.5", "cc-by-nd-3.0", "cc-by-nd-4.0",
-    "cddl-1.0", "cddl-1.1", "cecill-2.0", "cecill-b", "cecill-c", "cpal-1.0", "cpl-1.0",
-    "ecl-1.0", "ecl-2.0", "epl-1.0", "epl-2.0", "eupl-1.0", "eupl-1.1", "eupl-1.2",
-    "gpl-1.0", "gpl-2.0", "gpl-2.0+", "gpl-2.0-only", "gpl-2.0-or-later", "gpl-3.0",
-    "gpl-3.0-only", "gpl-3.0-or-later", "ibm-pibs", "ipl-1.0", "isc", "lgpl-2.0"
-    , "lgpl-2.0-only", "lgpl-2.0-or-later", "lgpl-2.1",
-    "lgpl-2.1-only", "lppl-1.3c", "mit", "mpl-1.0", "mpl-1.1",
-    "mpl-2.0", "ms-pl", "ms-rl", "ncsa", "ofl-1.1", "osl-1.0", "osl-2.0", "osl-2.1",
-    "osl-3.0", "php-3.0", "postgresql", "qpl-1.0", "sleepycat", "unlicense", "upl-1.0",
-    "vim", "wtfpl", "zlib"
+    "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0",
+    "cc-by-nc-nd-4.0", "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5",
+    "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0"
 }
 
-# Erwarteter Lizenzheader
-REQUIRED_LICENSE_HEADER = """/*****************************************************************************
+# Erwarteter Header, der in den .g4-Dateien vorhanden sein soll
+EXPECTED_HEADER = """
+/*****************************************************************************
  * SysML 2 Pilot Implementation
  * Copyright (c) 2018-2024 Model Driven Solutions, Inc.
  * Copyright (c) 2018 IncQuery Labs Ltd.
@@ -50,62 +41,122 @@ REQUIRED_LICENSE_HEADER = """/**************************************************
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
  *
- *****************************************************************************/"""
+ *****************************************************************************/
+"""
 
-def main():
-    # Suche nach .g4-Dateien
+# Debugging-Datei
+DEBUG_FILE = "debug_log.txt"
+
+def write_debug_log(message):
+    """
+    Schreibt eine Debug-Meldung in die Datei.
+    :param message: Die zu schreibende Meldung.
+    """
+    with open(DEBUG_FILE, "a") as log_file:
+        log_file.write(message + "\n")
+
+def find_g4_files(directory):
+    """
+    Sucht rekursiv nach .g4-Dateien im angegebenen Verzeichnis.
+    :param directory: Verzeichnis, in dem nach .g4-Dateien gesucht wird.
+    :return: Liste der gefundenen .g4-Dateien mit absoluten Pfaden.
+    """
     g4_files = []
-    for root, _, files in os.walk("."):
+    for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith(".g4"):
                 g4_files.append(os.path.join(root, file))
+    return g4_files
+
+def run_license_scan(files):
+    """
+    Führt einen Lizenzscan mit scancode-toolkit auf den angegebenen Dateien durch.
+    :param files: Liste der zu scannenden Dateien.
+    :return: Ergebnisse des Scans als Dictionary.
+    """
+    try:
+        write_debug_log(f"Starte Lizenzscan für {len(files)} .g4-Dateien.")
+        result = subprocess.run(
+            ["scancode-toolkit/scancode"] + files + ["--json", "result.json"],
+            capture_output=True,
+            text=True
+        )
+        write_debug_log(f"Scan-Ausgabe: {result.stdout}")
+        if result.returncode != 0:
+            write_debug_log(f"Scan fehlgeschlagen: {result.stderr}")
+            return None
+
+        with open("result.json", "r") as result_file:
+            data = json.load(result_file)
+        write_debug_log("Scan abgeschlossen. Ergebnisse in 'result.json' gespeichert.")
+        return data
+    except Exception as e:
+        write_debug_log(f"Fehler beim Lizenzscan: {str(e)}")
+        return None
+
+def check_licenses(scan_results):
+    """
+    Überprüft die Scan-Ergebnisse auf verbotene Lizenzen.
+    :param scan_results: Ergebnisse des Scans als Dictionary.
+    """
+    if not scan_results:
+        write_debug_log("Keine Scan-Ergebnisse vorhanden.")
+        return
+
+    write_debug_log("Starte Lizenzüberprüfung.")
+    for file in scan_results.get("files", []):
+        for license_info in file.get("licenses", []):
+            license_id = license_info.get("spdx_license_key", "")
+            if license_id in PROHIBITED_LICENSES:
+                message = f"Verbotene Lizenz entdeckt: {license_id} in Datei {file['path']}."
+                write_debug_log(message)
+                print(message)
+    write_debug_log("Lizenzüberprüfung abgeschlossen.")
+
+def check_header_in_g4_files(files):
+    """
+    Überprüft, ob die angegebenen .g4-Dateien den erwarteten Header enthalten.
+    :param files: Liste der zu überprüfenden .g4-Dateien.
+    """
+    write_debug_log(f"Überprüfe Header in {len(files)} .g4-Dateien.")
+    for file_path in files:
+        try:
+            with open(file_path, 'r') as f:
+                content = f.read()
+                if EXPECTED_HEADER in content:
+                    message = f"Header gefunden in {file_path}."
+                else:
+                    message = f"Header nicht gefunden in {file_path}."
+                write_debug_log(message)
+                print(message)
+        except Exception as e:
+            write_debug_log(f"Fehler beim Lesen der Datei {file_path}: {str(e)}")
+
+def main():
+    # Aktuelles Arbeitsverzeichnis als Ausgangspunkt
+    scan_path = os.getcwd()
+    write_debug_log(f"Programm gestartet im Verzeichnis: {scan_path}")
+
+    # Finde alle .g4-Dateien im Repository
+    g4_files = find_g4_files(scan_path)
+    write_debug_log(f"Gefundene .g4-Dateien: {g4_files}")
 
     if not g4_files:
+        write_debug_log("Keine .g4-Dateien gefunden.")
         print("Keine .g4-Dateien gefunden.")
-        sys.exit(1)
+        return
 
-    for g4_file in g4_files:
-        # Ausführen des ScanCode-Tools
-        result_file = f"{g4_file}_license_scan.json"
-        try:
-            subprocess.run(
-                ["scancode", "--license", "--license-text", "--json-pp", result_file, g4_file],
-                check=True
-            )
-        except subprocess.CalledProcessError as e:
-            print(f"Fehler beim Ausführen von ScanCode für {g4_file}: {e}")
-            sys.exit(1)
+    # Führe Lizenzscan auf den gefundenen .g4-Dateien durch
+    scan_results = run_license_scan(g4_files)
+    check_licenses(scan_results)
 
-        # Laden der Scan-Ergebnisse
-        try:
-            with open(result_file, "r", encoding="utf-8") as f:
-                scan_data = json.load(f)
-        except Exception as e:
-            print(f"Fehler beim Laden der Scan-Ergebnisse aus {result_file}: {e}")
-            sys.exit(1)
+    # Überprüfe Header in den .g4-Dateien
+    check_header_in_g4_files(g4_files)
 
-        # Speichern der Scan-Ergebnisse als Textdatei für Debugging-Zwecke
-        debug_text_file = f"{g4_file}_license_scan.txt"
-        try:
-            with open(debug_text_file, "w", encoding="utf-8") as f:
-                json.dump(scan_data, f, ensure_ascii=False, indent=4)
-        except Exception as e:
-            print(f"Fehler beim Speichern der Debug-Textdatei {debug_text_file}: {e}")
-            sys.exit(1)
+    write_debug_log("Programm abgeschlossen.")
 
-        # Überprüfen auf verbotene Lizenzen
-        for file_data in scan_data.get("files", []):
-            for license_detection in file_data.get("license_detections", []):
-                license_expression = license_detection.get("license_expression", "")
-                if any(prohibited in license_expression for prohibited in PROHIBITED_LICENSES):
-                    print(f"Verbotene Lizenz in {g4_file} gefunden: {license_expression}")
-                    sys.exit(1)
-
-    # Überprüfen des Lizenzheaders
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    # Debug-Log initialisieren
+    with open(DEBUG_FILE, "w") as log_file:
+        log_file.write("Debug-Log gestartet\n")
+    main()

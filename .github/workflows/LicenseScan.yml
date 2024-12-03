@@ -29,3 +29,14 @@ jobs:
       - name: Run License Compliance Check
         run: |
           python scripts/license_check.py
+
+      - name: Upload Scancode Toolkit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Scancode-log
+          
+      - name: Upload Debug Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-log
+          path: script/debug_log.txt

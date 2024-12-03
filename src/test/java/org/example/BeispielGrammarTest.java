@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BeispielGrammarTest {
-
+//prüft ob Eingabetext Syntaxfehler enthält. testValidInput()-> nur valide Eingabedaten, testInvalidInput()-> muss invaliden Input enthalten
     @Test
     public void testValidInput() {
         String input = "1+2";
@@ -19,7 +19,7 @@ public class BeispielGrammarTest {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         omg.beispielParser parser = new omg.beispielParser(tokens);
 
-        ParseTree tree = parser.start(); // Ersetze 'start' durch die tatsächliche Startregel deiner Grammatik
+        ParseTree tree = parser.start();
         assertEquals(0, parser.getNumberOfSyntaxErrors(), "Es sollten keine Syntaxfehler vorhanden sein.");
     }
 
@@ -30,7 +30,7 @@ public class BeispielGrammarTest {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         omg.beispielParser parser = new omg.beispielParser(tokens);
 
-        parser.start(); // Ersetze 'start' durch die tatsächliche Startregel deiner Grammatik
-        assertTrue(parser.getNumberOfSyntaxErrors() > 0, "Es sollten Syntaxfehler vorhanden sein."); // Korrektur hier
+        parser.start();
+        assertTrue(parser.getNumberOfSyntaxErrors() > 0, "Es sollten Syntaxfehler vorhanden sein.");
     }
 }
