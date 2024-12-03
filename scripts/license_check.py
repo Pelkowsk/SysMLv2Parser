@@ -12,7 +12,7 @@ PROHIBITED_LICENSES = {
 }
 
 # Erwarteter Header (als String)
-REQUIRED_HEADER = """[/*****************************************************************************
+REQUIRED_HEADER = """/*****************************************************************************
  * SysML 2 Pilot Implementation
  * Copyright (c) 2018-2024 Model Driven Solutions, Inc.
  * Copyright (c) 2018 IncQuery Labs Ltd.
@@ -40,7 +40,7 @@ REQUIRED_HEADER = """[/*********************************************************
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
  *
- *****************************************************************************/]"""
+ *****************************************************************************/"""
 
 scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
 if not os.path.exists(scancode_results_dir):
