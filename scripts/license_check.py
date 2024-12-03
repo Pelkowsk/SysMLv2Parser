@@ -129,7 +129,7 @@ report = {
     "status": "success" if not prohibited_files and not header_missing_files else "failure"
 }
 
-    # Ergebnisbericht speichern
+# Ergebnisbericht speichern
     with open("license_and_header_check_report.json", "w") as f:
         json.dump(report, f, indent=2)
 
@@ -140,5 +140,5 @@ report = {
     else:
         print("Erfolg: Keine verbotenen Lizenzen und alle erforderlichen Header gefunden.")
 
-if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
