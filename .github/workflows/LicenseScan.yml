@@ -59,9 +59,6 @@ jobs:
           echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
           echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
 
-      - name: Ensure ScanCode results directory exists
-        run: mkdir -p $SCANCODE_RESULTS_DIR
-        shell: bash
 
       - name: Run ScanCode Toolkit on .g4 files
         if: steps.find_g4_files.outputs.files_found == 'true'
@@ -75,18 +72,14 @@ jobs:
           name: scancode-reports
           path: ./scancode_results.json
 
-      - name: Check for .g4 files
-        id: check_g4_files
-        run: |
-          if [ "${{ steps.find_g4_files.outputs.files_found }}" == "false" ]; then
-            echo "Keine .g4-Dateien gefunden. Überspringe Lizenzprüfung."
-            exit 0
-          fi
+      - name: Create scancode_results directory
+        run: mkdir -p $GITHUB_WORKSPACE/scancode_results
+
+      - name: Move ScanCode report to scancode_results directory
+        run: mv $GITHUB_WORKSPACE/scancode_results.json $GITHUB_WORKSPACE/scancode_results/
 
       - name: Run check for license and specific header
-        if: steps.find_g4_files.outputs.files_found == 'true'
         run: python3 scripts/license_check.py
-
 
       - name: Upload g4 files list
         uses: actions/upload-artifact@v4
