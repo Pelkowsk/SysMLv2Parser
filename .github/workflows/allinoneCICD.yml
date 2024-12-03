@@ -62,7 +62,7 @@ jobs:
   license-and-header-check:
     name: License and Header Check
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: build-and-grammartest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
