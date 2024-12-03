@@ -1,18 +1,18 @@
-name: License Check
+name: License and Header Check
 
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
-  license-check:
+  license_and_header_check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -26,18 +26,35 @@ jobs:
           sudo apt-get install -y python3-pip
           pip3 install scancode-toolkit
 
-      - name: Run License Compliance Check
+      - name: Find all .g4 files
+        id: find_g4_files
         run: |
-          python scripts/license_check.py
+          find $GITHUB_WORKSPACE -name "*.g4" > g4_files.txt
+        shell: bash
 
-      - name: Upload Scancode Toolkit Report
+      - name: Run ScanCode Toolkit on .g4 files
+        run: |
+          mkdir -p scancode_results
+          while IFS= read -r file; do
+            scancode --json-pp "scancode_results/$(basename "$file").json" "$file"
+          done < g4_files.txt
+        shell: bash
+
+      - name: Run license and header check
+        run: |
+          python3 scripts/license_check.py
+        env:
+          G4_FILES_LIST: ${{ steps.find_g4_files.outputs.g4_files }}
+          SCANCODE_RESULTS_DIR: $GITHUB_WORKSPACE/scancode_results
+
+      - name: Upload ScanCode reports
         uses: actions/upload-artifact@v4
         with:
-          name: Scancode-log
-          path: ./result.json
+          name: scancode-reports
+          path: scancode_results/
 
-      - name: Upload Debug Log
+      - name: Upload g4 files list
         uses: actions/upload-artifact@v4
         with:
-          name: debug-log
-          path: debug_log.txt
+          name: g4-files-list
+          path: g4_files.txt
