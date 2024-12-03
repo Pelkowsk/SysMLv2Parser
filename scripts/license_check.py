@@ -127,14 +127,14 @@ report = {
     "prohibited_license: These files contain prohibited licenses, please check these files": prohibited_files,
     "missing_project_header: These files are missing the project's license header": header_missing_files,
     "status": "success" if not prohibited_files and not header_missing_files else "failure"
-}
+
 
 # Überprüfen, ob Dateien mit fehlendem Lizenz-Header vorhanden sind
 if header_missing_files:
     # Hinzufügen der Anweisung und des erwarteten Lizenz-Headers zum Bericht
     report["instruction"] = "Please copy this license header into the listed files above (missing project header):"
     report["expected_license_header"] = project_license_header
-
+}
     # Ergebnisbericht speichern
     with open("license_and_header_check_report.json", "w") as f:
         json.dump(report, f, indent=2)
