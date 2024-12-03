@@ -1,0 +1,41 @@
+name: License and Header Check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  license_and_header_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install ScanCode Toolkit
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-pip
+          pip3 install scancode-toolkit
+
+      - name: Find and scan .g4 files
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/scancode_results
+          find $GITHUB_WORKSPACE -name "*.g4" | tee g4_files.txt | xargs -I {} scancode -cl --json-pp "$GITHUB_WORKSPACE/scancode_results/$(basename {}).json" {}
+
+      - name: Run license and header check script
+        run: python3 scripts/license_check.py
+
+      - name: Upload license and header check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-and-header-check-report
+          path: license_and_header_check_report.json
