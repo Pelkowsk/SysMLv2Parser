@@ -59,14 +59,15 @@ jobs:
           done < $G4_FILES_LIST
         shell: bash
 
-      - name: Run check for license and specific header
-        run: python3 scripts/license_check.py
-
       - name: Upload ScanCode reports
         uses: actions/upload-artifact@v4
         with:
           name: scancode-reports
           path: $SCANCODE_RESULTS_DIR/
+
+      - name: Run check for license and specific header
+        run: python3 scripts/license_check.py
+
 
       - name: Upload g4 files list
         uses: actions/upload-artifact@v4
