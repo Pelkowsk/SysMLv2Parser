@@ -132,7 +132,7 @@ report = {
 
 }
 
-    # Ergebnisbericht speichern
+# Ergebnisbericht speichern
     with open("license_and_header_check_report.json", "w") as f:
         json.dump(report, f, indent=2)
 
