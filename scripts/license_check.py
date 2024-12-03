@@ -133,7 +133,7 @@ report = {
 if header_missing_files:
     # Hinzufügen der Anweisung und des erwarteten Lizenz-Headers zum Bericht
     report["instruction"] = "Please copy this license header into the listed files above (missing project header):"
-    report["expected_license_header"] = REQUIRED_HEADER
+    report["expected_license_header"] = project_license_header
 
     # Ergebnisbericht speichern
     with open("license_and_header_check_report.json", "w") as f:
