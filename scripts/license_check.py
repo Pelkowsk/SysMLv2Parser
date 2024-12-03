@@ -20,6 +20,10 @@ def load_scancode_results(scancode_results_dir):
     :param scancode_results_dir: Verzeichnis mit den ScanCode-Ergebnisdateien.
     :return: Liste der Scan-Ergebnisse.
     """
+    if not os.path.exists(scancode_results_dir):
+        print(f"Fehler: Verzeichnis '{scancode_results_dir}' wurde nicht gefunden.")
+        sys.exit(1)
+
     results = []
     for filename in os.listdir(scancode_results_dir):
         if filename.endswith(".json"):
@@ -63,6 +67,9 @@ def main():
     if not scancode_results_dir or not g4_files_list_path:
         print("Fehler: Umgebungsvariablen 'SCANCODE_RESULTS_DIR' oder 'G4_FILES_LIST' nicht gesetzt.")
         sys.exit(1)
+
+    print(f"Debug: SCANCODE_RESULTS_DIR={scancode_results_dir}")
+    print(f"Debug: G4_FILES_LIST={g4_files_list_path}")
 
     # Lade ScanCode-Ergebnisse
     scan_results = load_scancode_results(scancode_results_dir)
