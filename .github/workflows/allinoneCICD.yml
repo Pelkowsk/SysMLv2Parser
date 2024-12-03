@@ -105,6 +105,11 @@ jobs:
           done < g4_files.txt
         shell: bash
 
+      - name: Set environment variables
+        run: |
+          echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
+          echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
+
       - name: Run ScanCode Toolkit on .g4 files
         if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
