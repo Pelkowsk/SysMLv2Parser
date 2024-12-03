@@ -29,10 +29,22 @@ jobs:
       - name: Find all .g4 files
         id: find_g4_files
         run: |
+          # Suche nach allen .g4-Dateien und speichere die Pfade in g4_files.txt
           find $GITHUB_WORKSPACE -name "*.g4" > g4_files.txt
-        shell: bash
+          # Zähle die Anzahl der gefundenen Dateien
+          file_count=$(wc -l < g4_files.txt)
+          echo "Anzahl der gefundenen .g4-Dateien: $file_count"
+          # Setze den Output-Wert 'files_found' entsprechend
+          if [ "$file_count" -gt 0 ]; then
+          echo "::set-output name=files_found::true"
+          else
+          echo "::set-output name=files_found::false"
+          fi
+          shell: bash
+    
 
       - name: Run ScanCode Toolkit on .g4 files
+        if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
           mkdir -p scancode_results
           while IFS= read -r file; do
@@ -40,7 +52,8 @@ jobs:
           done < g4_files.txt
         shell: bash
 
-      - name: Run license and header check
+
+      - name: Run check for license and specific header
         run: |
           python3 scripts/license_check.py
         env:
