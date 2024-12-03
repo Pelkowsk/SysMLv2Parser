@@ -56,7 +56,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ github.run_id }}-${{ env.TIMESTAMP }}
+          name: test-results-${{ env.TIMESTAMP }}
           path: build/reports/tests/test
 
   license-and-header-check:
@@ -116,12 +116,6 @@ jobs:
           scancode -cl --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
-      - name: Upload ScanCode reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: scancode-reports
-          path: ./scancode_results.json
-
       - name: Create scancode_results directory
         run: mkdir -p $GITHUB_WORKSPACE/scancode_results
 
@@ -131,11 +125,17 @@ jobs:
       - name: Run license and header check script
         run: python3 scripts/license_check.py
 
+      - name: Upload ScanCode reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: scancode-reports-${{ env.TIMESTAMP }}
+          path: ./scancode_results.json
+
       - name: Upload license and header check report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: license-and-header-check-report
+          name: license-and-header-check-report-${{ env.TIMESTAMP }}
           path: license_and_header_check_report.json
 
   docker-image-push:
