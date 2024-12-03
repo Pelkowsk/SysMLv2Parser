@@ -86,3 +86,20 @@ jobs:
         with:
           name: g4-files-list
           path: $G4_FILES_LIST
+
+      - name: Check for license and header check report
+        if: always()
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/license_and_header_check_report.json" ]; then
+            echo "Report found."
+          else
+            echo "Report not found."
+          fi
+        shell: bash
+
+      - name: Upload license and header check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-and-header-check-report
+          path: $GITHUB_WORKSPACE/license_and_header_check_report.json
