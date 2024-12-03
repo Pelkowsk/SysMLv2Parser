@@ -2,7 +2,7 @@ import os
 import json
 import sys
 
-# Liste der mit der LGPLv3 inkompatiblen Lizenzen
+# List of licenses incompatible with LGPLv3
 PROHIBITED_LICENSES = {
     "afl-3.0", "apache-2.0", "artistic-1.0", "bittorrent-1.0", "bittorrent-1.1",
     "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
@@ -11,7 +11,7 @@ PROHIBITED_LICENSES = {
     "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0"
 }
 
-# Erwarteter Header (als String)
+# Expected header (as string)
 REQUIRED_HEADER = """/*****************************************************************************
  * SysML 2 Pilot Implementation
  * Copyright (c) 2018-2024 Model Driven Solutions, Inc.
@@ -44,21 +44,21 @@ REQUIRED_HEADER = """/**********************************************************
 
 scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
 if not os.path.exists(scancode_results_dir):
-    print(f"Fehler: Verzeichnis '{scancode_results_dir}' wurde nicht gefunden.")
+    print(f"Error: Directory '{scancode_results_dir}' not found.")
     sys.exit(1)
 
 if not os.listdir(scancode_results_dir):
-    print(f"Warnung: Verzeichnis '{scancode_results_dir}' ist leer. Keine Scan-Ergebnisse vorhanden.")
+    print(f"Warning: Directory '{scancode_results_dir}' is empty. No scan results available.")
     sys.exit(0)
 
 def load_scancode_results(scancode_results_dir):
     """
-    Lädt alle ScanCode-Ergebnisse aus dem angegebenen Verzeichnis.
-    :param scancode_results_dir: Verzeichnis mit den ScanCode-Ergebnisdateien.
-    :return: Liste der Scan-Ergebnisse.
+    Loads all ScanCode results from the specified directory.
+    :param scancode_results_dir: Directory containing ScanCode result files.
+    :return: List of scan results.
     """
     if not os.path.exists(scancode_results_dir):
-        print(f"Fehler: Verzeichnis '{scancode_results_dir}' wurde nicht gefunden.")
+        print(f"Error: Directory '{scancode_results_dir}' not found.")
         sys.exit(1)
 
     results = []
@@ -70,9 +70,9 @@ def load_scancode_results(scancode_results_dir):
 
 def check_licenses(scan_results):
     """
-    Überprüft die Scan-Ergebnisse auf verbotene Lizenzen.
-    :param scan_results: Liste der Scan-Ergebnisse.
-    :return: Liste der Dateien mit verbotenen Lizenzen.
+    Checks the scan results for prohibited licenses.
+    :param scan_results: List of scan results.
+    :return: List of files with prohibited licenses.
     """
     prohibited_files = []
     for result in scan_results:
@@ -88,10 +88,10 @@ def check_licenses(scan_results):
 
 def check_header(file_path, required_header):
     """
-    Überprüft, ob die Datei den erforderlichen Header enthält.
-    :param file_path: Pfad zur Datei.
-    :param required_header: Erwarteter Header-Text.
-    :return: True, wenn der Header gefunden wurde, sonst False.
+    Checks if the file contains the required header.
+    :param file_path: Path to the file.
+    :param required_header: Expected header text.
+    :return: True if the header is found, otherwise False.
     """
     with open(file_path, "r") as f:
         content = f.read()
@@ -102,19 +102,19 @@ def main():
     g4_files_list_path = os.getenv("G4_FILES_LIST")
 
     if not scancode_results_dir or not g4_files_list_path:
-        print("Fehler: Umgebungsvariablen 'SCANCODE_RESULTS_DIR' oder 'G4_FILES_LIST' nicht gesetzt.")
+        print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST' not set.")
         sys.exit(1)
 
     print(f"Debug: SCANCODE_RESULTS_DIR={scancode_results_dir}")
     print(f"Debug: G4_FILES_LIST={g4_files_list_path}")
 
-    # Lade ScanCode-Ergebnisse
+    # Load ScanCode results
     scan_results = load_scancode_results(scancode_results_dir)
 
-    # Überprüfe auf verbotene Lizenzen
+    # Check for prohibited licenses
     prohibited_files = check_licenses(scan_results)
 
-    # Überprüfe Header in .g4-Dateien
+    # Check headers in .g4 files
     header_missing_files = []
     with open(g4_files_list_path, "r") as f:
         for line in f:
@@ -122,23 +122,23 @@ def main():
             if not check_header(g4_file_path, REQUIRED_HEADER):
                 header_missing_files.append(g4_file_path)
 
-    # Ergebnisbericht erstellen
+    # Create report
     report = {
-        "file contains prohibited licenses": prohibited_files,
-        "file is missing specific project license header": header_missing_files,
+        "prohibited_licenses": prohibited_files,
+        "missing_headers": header_missing_files,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
-    # Ergebnisbericht speichern
+    # Save report
     with open("license_and_header_check_report.json", "w") as f:
         json.dump(report, f, indent=2)
 
-    # Pipeline-Status basierend auf den Ergebnissen setzen
+    # Set pipeline status based on results
     if report["status"] == "failure":
-        print("Fehler: Verbotene Lizenzen oder fehlende Header gefunden. Details siehe 'license_and_header_check_report.json'.")
+        print("Failure: Prohibited licenses or missing headers found. See 'license_and_header_check_report.json' for details.")
         sys.exit(1)
     else:
-        print("Erfolg: Keine verbotenen Lizenzen und alle erforderlichen Header gefunden.")
+        print("Success: No prohibited licenses and all required headers found.")
 
 if __name__ == "__main__":
     main()
