@@ -81,6 +81,7 @@ def run_license_scan(files):
             capture_output=True,
             text=True
         )
+
         write_debug_log(f"Scan-Ausgabe: {result.stdout}")
         if result.returncode != 0:
             write_debug_log(f"Scan fehlgeschlagen: {result.stderr}")
@@ -93,12 +94,30 @@ def run_license_scan(files):
     except Exception as e:
         write_debug_log(f"Fehler beim Lizenzscan: {str(e)}")
         return None
+# eingefügt 1*
+# Pfad zur 'result.json'-Datei
+result_file_path = "result.json"
 
+# Überprüfen, ob die Datei existiert
+if os.path.exists(result_file_path):
+    # Pfad zur 'GITHUB_OUTPUT'-Datei aus den Umgebungsvariablen abrufen
+    github_output = os.getenv('GITHUB_OUTPUT')
+    if github_output:
+        # Ausgabeparameter 'scancode_result' mit dem Pfad zur 'result.json'-Datei festlegen
+        with open(github_output, 'a') as output_file:
+            print(f"scancode_result={result_file_path}", file=output_file)
+    else:
+        print("Fehler: 'GITHUB_OUTPUT' Umgebungsvariable ist nicht gesetzt.")
+else:
+    print(f"Fehler: Datei '{result_file_path}' wurde nicht gefunden.")
     # Nach dem Ausführen des ScanCode-Scans und dem Speichern in 'result.json'
+
 if os.path.exists("result.json"):
     write_debug_log("Die Datei 'result.json' wurde erfolgreich erstellt.")
 else:
     write_debug_log("Fehler: Die Datei 'result.json' wurde nicht gefunden.")
+
+# eingefügt 1*
 
 
 def check_licenses(scan_results):
