@@ -56,7 +56,7 @@ jobs:
           python3 scripts/license_check.py
         env:
           G4_FILES_LIST: ${{ steps.find_g4_files.outputs.files_found }}
-          SCANCODE_RESULTS_DIR: ${{GITHUB_WORKSPACE}}/scancode_results
+          SCANCODE_RESULTS_DIR: $GITHUB_WORKSPACE/scancode_results
 
       - name: Upload ScanCode reports
         uses: actions/upload-artifact@v4
