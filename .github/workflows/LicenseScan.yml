@@ -42,6 +42,18 @@ jobs:
           fi
         shell: bash
 
+      - name: Create temporary directory for .g4 files
+        run: mkdir -p $GITHUB_WORKSPACE/temp_g4_files
+        shell: bash
+
+      - name: Copy .g4 files to temporary directory
+        if: steps.find_g4_files.outputs.files_found == 'true'
+        run: |
+          while IFS= read -r file; do
+            cp "$file" $GITHUB_WORKSPACE/temp_g4_files/
+          done < g4_files.txt
+        shell: bash
+
       - name: Set environment variables
         run: |
           echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
@@ -53,10 +65,8 @@ jobs:
 
       - name: Run ScanCode Toolkit on .g4 files
         if: steps.find_g4_files.outputs.files_found == 'true'
-        run: | 
-          while IFS= read -r file; do
-            scancode --json-pp "$SCANCODE_RESULTS_DIR/$(basename "$file").json" "$file"
-          done < $G4_FILES_LIST
+        run: |
+          scancode --json-pp "$SCANCODE_RESULTS_DIR/scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
       - name: Upload ScanCode reports
