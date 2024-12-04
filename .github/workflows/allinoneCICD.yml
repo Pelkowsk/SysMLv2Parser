@@ -112,7 +112,7 @@ jobs:
 
       - name: Set Timestamp
         id: timestamp
-        run: echo "TIMESTAMP=$(date +'%h-%d-%m_%Y-%M-%S')" >> $GITHUB_ENV
+        run: echo "TIMESTAMP=$(date +'%d.%m.%Y-%H:%M:%S')" >> $GITHUB_ENV
 
       - name: Run ScanCode Toolkit on .g4 files
         if: steps.find_g4_files.outputs.files_found == 'true'
