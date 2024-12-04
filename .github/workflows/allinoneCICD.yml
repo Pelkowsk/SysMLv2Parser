@@ -133,7 +133,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: scancode-reports-${{ env.TIMESTAMP }}
-          path: scancode_results.json
+          path: $GITHUB_WORKSPACE/scancode_results/scancode_results.json
 
       - name: Upload license and header check report
         if: always()
