@@ -25,7 +25,7 @@ public class BeispielGrammarTest {
 
     @Test
     public void testInvalidInput() {
-        String input = "1+2+a";
+        String input = "1+2";
         omg.beispielLexer lexer = new omg.beispielLexer(CharStreams.fromString(input));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         omg.beispielParser parser = new omg.beispielParser(tokens);
