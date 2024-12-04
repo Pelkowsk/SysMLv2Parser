@@ -124,8 +124,8 @@ def main():
 
     # Create report
     report = {
-        "prohibited_licenses": prohibited_files,
-        "missing_headers": header_missing_files,
+        "file contains prohibited_licenses": prohibited_files,
+        "file does not contain missing_headers": header_missing_files,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
