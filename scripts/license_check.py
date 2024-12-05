@@ -8,7 +8,7 @@ PROHIBITED_LICENSES = {
     "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
     "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0",
     "cc-by-nc-nd-4.0", "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5",
-    "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0"
+    "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0", "BitTorrent-1.0"
 }
 
 # Expected header (as string)
