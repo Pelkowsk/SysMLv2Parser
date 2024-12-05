@@ -46,6 +46,14 @@ REQUIRED_HEADER = """/**********************************************************
 *
 *****************************************************************************/"""
 
+scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
+g4_files_list = os.getenv('G4_FILES_LIST')
+
+if not scancode_results_dir or not g4_files_list:
+    print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST' not set.")
+    sys.exit(1)
+
+
 def load_scancode_results_as_string(scancode_results_dir):
     """
     Lädt den gesamten Inhalt aller ScanCode-Ergebnisdateien als einen einzigen String in Kleinbuchstaben.

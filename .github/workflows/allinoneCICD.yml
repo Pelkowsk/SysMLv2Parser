@@ -108,7 +108,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
-          echo "g4_file_list=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
+          echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
 
       - name: Set Timestamp
         id: timestamp
