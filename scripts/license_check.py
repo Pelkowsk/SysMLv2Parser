@@ -47,7 +47,7 @@ PROJECT_LICENSE_HEADER = """/***************************************************
 
 scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
 output_report_path = os.getenv('OUTPUT_REPORT_PATH', 'license_check_report.json')
-file_list_path = os.getenv('FILE_LIST_PATH', 'file_list.txt')  # Liste der zu prüfenden Dateien
+file_list_path = os.getenv('G4_FILES_LIST', 'g4_files.txt')  # List of g4.files, for licence header check
 if not os.path.exists(scancode_results_dir):
     print(f"Error: Directory '{scancode_results_dir}' not found.")
     sys.exit(1)
