@@ -75,21 +75,29 @@ def load_scancode_results(scancode_results_dir):
 
 def check_licenses(scan_results):
     """
-    Checks the scan results for prohibited licenses.
-    :param scan_results: List of scan results.
-    :return: List of files with prohibited licenses.
+    Prüft die Scan-Ergebnisse auf verbotene Lizenzen.
+    :param scan_results: Liste der Scan-Ergebnisse.
+    :return: Liste der Dateien mit verbotenen Lizenzen.
     """
-    prohibited_files = []
+    prohibited_files = []  # Dateien mit verbotenen Lizenzen sammeln.
+
     for result in scan_results:
         for file in result.get("files", []):
             for license_info in file.get("licenses", []):
-                license_id = license_info.get("spdx_license_key", "")
-                if license_id in PROHIBITED_LICENSES:
+                # Lizenzinformationen extrahieren und normalisieren.
+                license_id = license_info.get("spdx_license_key", "").lower()
+                license_expression = license_info.get("license_expression_spdx", "").lower()
+
+                # Lizenz in einfacher oder kombinierter Form prüfen.
+                if license_id in [x.lower() for x in PROHIBITED_LICENSES] or \
+                        any(prohibited in license_expression for prohibited in [x.lower() for x in PROHIBITED_LICENSES]):
                     prohibited_files.append({
                         "file": file["path"],
-                        "license": license_id
+                        "license": license_id or license_expression
                     })
+
     return prohibited_files
+
 
 def check_header(file_path, required_header):
     """
