@@ -62,18 +62,21 @@ def load_scancode_results(scancode_results_dir):
     """
     Loads all ScanCode results from the specified directory.
     :param scancode_results_dir: Directory containing ScanCode result files.
-    :return: List of scan results.
+    :return: List of scan results and whole loaded data.
     """
     if not os.path.exists(scancode_results_dir):
         print(f"Error: Directory '{scancode_results_dir}' not found.")
         sys.exit(1)
 
     results = []
+    raw_contents = {}  # Dictionary zum Speichern der rohen Inhalte
     for filename in os.listdir(scancode_results_dir):
         if filename.endswith(".json"):
             with open(os.path.join(scancode_results_dir, filename), "r") as f:
-                results.append(json.load(f))
-    return results
+                content = json.load(f)
+                results.append(content)
+                raw_contents[filename] = content  # Speichern des Inhalts mit dem Dateinamen als Schlüssel
+    return results, raw_contents
 
 def check_licenses(scan_results):
     prohibited_files = []
@@ -123,7 +126,7 @@ def main():
     print(f"Debug: G4_FILES_LIST={g4_files_list_path}")
 
     # Load ScanCode results
-    scan_results = load_scancode_results(scancode_results_dir)
+    scan_results, raw_content = load_scancode_results(scancode_results_dir)
 
     # Check for prohibited licenses
     prohibited_files, all_checked_licenses = check_licenses(scan_results)
@@ -141,6 +144,7 @@ def main():
         "file contains prohibited_licenses": prohibited_files,
         "file does not contain project license header, please insert missing_headers": header_missing_files,
         "List of all checked licenses": all_checked_licenses,
+        "Raw Scancode contents": raw_content,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
