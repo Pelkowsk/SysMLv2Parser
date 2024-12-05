@@ -117,6 +117,11 @@ def main():
     scancode_results_dir = os.getenv("SCANCODE_RESULTS_DIR")
     g4_files_list_path = os.getenv("G4_FILES_LIST")
 
+    # Debug-Ausgabe: Anzeigen der geladenen Scan-Ergebnisse
+    print("[DEBUG] Geladene Scan-Ergebnisse:")
+    for result in scan_results:
+        print(json.dumps(result, indent=2))
+
     if not scancode_results_dir or not g4_files_list_path:
         print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST' not set.")
         sys.exit(1)
