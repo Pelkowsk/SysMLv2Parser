@@ -1,0 +1,6 @@
+# Erlaubte Ordner
+src/test/java/org/example/  @team
+src/antlr/grammar/          @team
+
+# Standardregel: Niemand darf andere Ordner bearbeiten
+*                          @repo-owner
