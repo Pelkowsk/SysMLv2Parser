@@ -1,163 +1,162 @@
 import os
-import json
 import sys
+import json
 
-# List of licenses incompatible with LGPLv3
+# Liste der verbotenen Lizenzen in Kleinbuchstaben
 PROHIBITED_LICENSES = {
-    "AGPL-1.0-only", "AGPL-1.0-or-later", "AGPL-3.0-only", "AGPL-3.0-or-later",
-    "BitTorrent-1.0", "BitTorrent-1.1",
-    "CC-BY-NC-1.0", "CC-BY-NC-2.0", "CC-BY-NC-2.5", "CC-BY-NC-3.0", "CC-BY-NC-4.0",
-    "CC-BY-NC-ND-1.0", "CC-BY-NC-ND-2.0", "CC-BY-NC-ND-2.5", "CC-BY-NC-ND-3.0", "CC-BY-NC-ND-4.0",
-    "CC-BY-NC-SA-1.0", "CC-BY-NC-SA-2.0", "CC-BY-NC-SA-2.5", "CC-BY-NC-SA-3.0", "CC-BY-NC-SA-4.0",
-    "CPAL-1.0", "EPL-1.0", "EPL-2.0", "EUPL-1.1", "EUPL-1.2",
-    "IPL-1.0", "MS-PL", "MPL-1.0", "MPL-1.1", "MPL-2.0",
-    "OSL-3.0", "SSPL-1.0",
-    "Unlicense", "WTFPL", "Zlib-acknowledgement"
-
+    "agpl-1.0-only", "agpl-1.0-or-later", "agpl-3.0-only", "agpl-3.0-or-later",
+    "bittorrent-1.0", "bittorrent-1.1",
+    "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
+    "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0", "cc-by-nc-nd-4.0",
+    "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5", "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0",
+    "cpal-1.0", "epl-1.0", "epl-2.0", "eupl-1.1", "eupl-1.2",
+    "ipl-1.0", "ms-pl", "mpl-1.0", "mpl-1.1", "mpl-2.0",
+    "osl-3.0", "sspl-1.0",
+    "unlicense", "wtfpl", "zlib-acknowledgement"
 }
 
-PROHIBITED_LICENSES = [license.casefold() for license in PROHIBITED_LICENSES]
-
-# Expected header (as string)
+# Erwarteter Lizenzheader (Platzhalter)
 REQUIRED_HEADER = """/*****************************************************************************
- * SysML 2 Pilot Implementation
- * Copyright (c) 2018-2024 Model Driven Solutions, Inc.
- * Copyright (c) 2018 IncQuery Labs Ltd.
- * Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
- * Copyright (c) 2019 Mgnite Inc.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * @license LGPL-3.0-or-later <http://spdx.org/licenses/LGPL-3.0-or-later>
- *
- * Contributors:
- *  Ed Seidewitz, MDS
- *  Zoltan Kiss, IncQuery
- *  Balazs Grill, IncQuery
- *  Hisashi Miyashita, Maplesoft/Mgnite
- *
- *****************************************************************************/"""
+* SysML 2 Pilot Implementation
+* Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+* Copyright (c) 2018 IncQuery Labs Ltd.
+* Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
+* Copyright (c) 2019 Mgnite Inc.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+    *
+* You should have received a copy of the GNU Lesser General Public License
+* along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*
+* @license LGPL-3.0-or-later <http://spdx.org/licenses/LGPL-3.0-or-later>
+*
+* Contributors:
+*  Ed Seidewitz, MDS
+*  Zoltan Kiss, IncQuery
+*  Balazs Grill, IncQuery
+*  Hisashi Miyashita, Maplesoft/Mgnite
+*
+*****************************************************************************/"""
 
-scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
-if not os.path.exists(scancode_results_dir):
-    print(f"Error: Directory '{scancode_results_dir}' not found.")
-    sys.exit(1)
-
-if not os.listdir(scancode_results_dir):
-    print(f"Warning: Directory '{scancode_results_dir}' is empty. No scan results available.")
-    sys.exit(0)
-
-def load_scancode_results(scancode_results_dir):
+def load_scancode_results_as_string(scancode_results_dir):
     """
-    Loads all ScanCode results from the specified directory.
-    :param scancode_results_dir: Directory containing ScanCode result files.
-    :return: List of scan results and whole loaded data.
+    Lädt den gesamten Inhalt aller ScanCode-Ergebnisdateien als einen einzigen String in Kleinbuchstaben.
+    :param scancode_results_dir: Verzeichnis mit ScanCode-Ergebnisdateien.
+    :return: Gesamter Inhalt der Dateien als String in Kleinbuchstaben.
     """
     if not os.path.exists(scancode_results_dir):
         print(f"Error: Directory '{scancode_results_dir}' not found.")
         sys.exit(1)
 
-    results = []
-    raw_contents = {}  # Dictionary zum Speichern der rohen Inhalte
+    combined_content = ""
     for filename in os.listdir(scancode_results_dir):
         if filename.endswith(".json"):
-            with open(os.path.join(scancode_results_dir, filename), "r") as f:
-                content = json.load(f)
-                results.append(content)
-                raw_contents[filename] = content  # Speichern des Inhalts mit dem Dateinamen als Schlüssel
-    return results, raw_contents
+            with open(os.path.join(scancode_results_dir, filename), "r", encoding="utf-8") as f:
+                combined_content += f.read().casefold()
+    return combined_content
 
-def check_licenses(scan_results):
-    prohibited_files = []
-    all_checked_licenses = []
-
-    for result in scan_results:
-        for file in result.get("files", []):
-            for license_info in file.get("licenses", []):
-                license_id = license_info.get("spdx_license_key", "").casefold()
-                license_expression = license_info.get("license_expression_spdx", "").casefold()
-
-                all_checked_licenses.append({
-                    "file": file["path"],
-                    "license_id": license_id,
-                    "license_expression": license_expression
-                })
-
-                if license_id in PROHIBITED_LICENSES or \
-                        any(prohibited in license_expression for prohibited in PROHIBITED_LICENSES):
-                    prohibited_files.append({
-                        "file": file["path"],
-                        "license": license_id or license_expression
-                    })
-
-    return prohibited_files, all_checked_licenses
-
-def check_header(file_path, required_header):
+def find_prohibited_licenses_in_content(content):
     """
-    Checks if the file contains the required header.
-    :param file_path: Path to the file.
-    :param required_header: Expected header text.
-    :return: True if the header is found, otherwise False.
+    Sucht nach verbotenen Lizenzen im gegebenen Inhalt.
+    :param content: Inhalt als String in Kleinbuchstaben.
+    :return: Liste der gefundenen verbotenen Lizenzen.
     """
-    with open(file_path, "r") as f:
-        content = f.read()
-        return required_header in content
+    found_licenses = []
+    for license in PROHIBITED_LICENSES:
+        if license in content and license not in found_licenses:
+            found_licenses.append(license)
+    return found_licenses
 
-def main():
-    scancode_results_dir = os.getenv("SCANCODE_RESULTS_DIR")
-    g4_files_list_path = os.getenv("G4_FILES_LIST")
-
-    if not scancode_results_dir or not g4_files_list_path:
-        print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST' not set.")
+def check_g4_files_for_license_header(g4_files_list_path, required_header):
+    """
+    Überprüft, ob die in der Liste angegebenen .g4-Dateien den erforderlichen Lizenzheader enthalten.
+    :param g4_files_list_path: Pfad zur Datei mit der Liste der .g4-Dateien.
+    :param required_header: Erwarteter Lizenzheader als Zeichenkette.
+    :return: Liste der Dateien ohne den erforderlichen Lizenzheader.
+    """
+    if not os.path.exists(g4_files_list_path):
+        print(f"Error: File list '{g4_files_list_path}' not found.")
         sys.exit(1)
 
-    print(f"Debug: SCANCODE_RESULTS_DIR={scancode_results_dir}")
-    print(f"Debug: G4_FILES_LIST={g4_files_list_path}")
+    missing_headers = []
+    with open(g4_files_list_path, "r") as file_list:
+        for filepath in file_list:
+            filepath = filepath.strip()
+            if filepath and os.path.exists(filepath):
+                try:
+                    with open(filepath, "r", encoding="utf-8") as file:
+                        content = file.read()
+                        if required_header not in content:
+                            missing_headers.append(filepath)
+                except Exception as e:
+                    print(f"Error reading file '{filepath}': {e}")
+                    missing_headers.append(filepath)
+            else:
+                print(f"Warning: File '{filepath}' does not exist.")
+                missing_headers.append(filepath)
+    return missing_headers
 
-    # Load ScanCode results
-    scan_results, raw_content = load_scancode_results(scancode_results_dir)
-
-    # Check for prohibited licenses
-    prohibited_files, all_checked_licenses = check_licenses(scan_results)
-
-    # Check headers in .g4 files
-    header_missing_files = []
-    with open(g4_files_list_path, "r") as f:
-        for line in f:
-            g4_file_path = line.strip()
-            if not check_header(g4_file_path, REQUIRED_HEADER):
-                header_missing_files.append(g4_file_path)
-
-    # Create report
+def write_report(prohibited_files, missing_headers, output_report_path):
+    """
+    Schreibt den Report mit verbotenen Lizenzen und fehlenden Lizenzheaders in eine JSON-Datei.
+    :param prohibited_files: Liste der gefundenen verbotenen Lizenzen.
+    :param missing_headers: Liste der Dateien ohne Projektlizenzheader.
+    :param output_report_path: Pfad zur Ausgabedatei für den Bericht.
+    """
     report = {
-        "file contains prohibited_licenses": prohibited_files,
-        "file does not contain project license header, please insert missing_headers": header_missing_files,
-        "List of all checked licenses": all_checked_licenses,
-        "Raw Scancode contents": raw_content,
+        "These files contain prohibited licenses": prohibited_files,
+        "These files do not contain the project license header; please insert missing headers": missing_headers,
+        "status": "success" if not prohibited_files and not missing_headers else "failure"
+    }
+
+    with open(output_report_path, "w", encoding="utf-8") as report_file:
+        json.dump(report, report_file, indent=2)
+    print(f"Report written to {output_report_path}")
+
+def main():
+    scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
+    g4_files_list_path = os.getenv('G4_FILES_LIST_PATH')
+    output_report_path = os.getenv('OUTPUT_REPORT_PATH', 'license_and_header_check_report.json')
+
+    if not scancode_results_dir or not g4_files_list_path:
+        print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST_PATH' not set.")
+        sys.exit(1)
+
+    # Gesamten Inhalt der ScanCode-Ergebnisdateien einlesen und in Kleinbuchstaben umwandeln
+    combined_content = load_scancode_results_as_string(scancode_results_dir)
+
+    # Nach verbotenen Lizenzen im kombinierten Inhalt suchen
+    prohibited_files = find_prohibited_licenses_in_content(combined_content)
+
+    # Überprüfen, ob die .g4-Dateien den erforderlichen Lizenzheader enthalten
+    header_missing_files = check_g4_files_for_license_header(g4_files_list_path, REQUIRED_HEADER)
+
+    # Report erstellen
+    report = {
+        "These files contain prohibited licenses": prohibited_files,
+        "These files do not contain the project license header; please insert missing headers": header_missing_files,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
-    # Save report
-    with open("license_and_header_check_report.json", "w") as f:
+    # Report speichern
+    with open(output_report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
 
-    # Set pipeline status based on results
+    # Pipeline-Status basierend auf den Ergebnissen setzen
     if report["status"] == "failure":
-        print("Failure: Prohibited licenses or missing headers found. See 'license_and_header_check_report.json' for details.")
+        print(f"Failure: Prohibited licenses or missing headers found. See '{output_report_path}' for details.")
         sys.exit(1)
     else:
         print("Success: No prohibited licenses and all required headers found.")
 
 if __name__ == "__main__":
     main()
+
