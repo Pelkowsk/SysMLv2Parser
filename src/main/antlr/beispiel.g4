@@ -30,6 +30,8 @@
 
 /*bittorrent-1.0*/
 
+/*MPL-1.0*/
+
 grammar beispiel;
 
 start : expression ;

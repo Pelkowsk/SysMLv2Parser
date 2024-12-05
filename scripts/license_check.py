@@ -4,11 +4,16 @@ import sys
 
 # List of licenses incompatible with LGPLv3
 PROHIBITED_LICENSES = {
-    "afl-3.0", "apache-2.0", "artistic-1.0", "bittorrent-1.0", "bittorrent-1.1",
-    "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
-    "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0",
-    "cc-by-nc-nd-4.0", "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5",
-    "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0", "BitTorrent-1.0"
+    "AGPL-1.0-only", "AGPL-1.0-or-later", "AGPL-3.0-only", "AGPL-3.0-or-later",
+    "BitTorrent-1.0", "BitTorrent-1.1",
+    "CC-BY-NC-1.0", "CC-BY-NC-2.0", "CC-BY-NC-2.5", "CC-BY-NC-3.0", "CC-BY-NC-4.0",
+    "CC-BY-NC-ND-1.0", "CC-BY-NC-ND-2.0", "CC-BY-NC-ND-2.5", "CC-BY-NC-ND-3.0", "CC-BY-NC-ND-4.0",
+    "CC-BY-NC-SA-1.0", "CC-BY-NC-SA-2.0", "CC-BY-NC-SA-2.5", "CC-BY-NC-SA-3.0", "CC-BY-NC-SA-4.0",
+    "CPAL-1.0", "EPL-1.0", "EPL-2.0", "EUPL-1.1", "EUPL-1.2",
+    "IPL-1.0", "MS-PL", "MPL-1.0", "MPL-1.1", "MPL-2.0",
+    "OSL-3.0", "SSPL-1.0",
+    "Unlicense", "WTFPL", "Zlib-acknowledgement"
+
 }
 
 # Expected header (as string)
