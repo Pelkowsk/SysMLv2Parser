@@ -96,7 +96,10 @@ def check_licenses(scan_results):
                         "license": license_id or license_expression
                     })
 
-    return prohibited_files
+    # Debug-Ausgabe: Anzeigen, was in die Liste prohibited_files geschrieben wird
+    print("[DEBUG] Inhalt der Liste prohibited_files:")
+    for entry in prohibited_files:
+        print(f"- Datei: {entry['file']}, Lizenz: {entry['license']}")
 
 
 def check_header(file_path, required_header):
