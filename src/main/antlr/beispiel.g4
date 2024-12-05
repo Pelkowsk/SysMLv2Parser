@@ -25,7 +25,7 @@
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- *
+ * bittorrent-1.0
  *****************************************************************************/
 
 grammar beispiel;
