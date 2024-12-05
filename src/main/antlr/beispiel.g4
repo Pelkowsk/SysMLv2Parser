@@ -26,8 +26,6 @@
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
  *
-
- *---
  *****************************************************************************/
 
 /*bittorrent-1.0*/
