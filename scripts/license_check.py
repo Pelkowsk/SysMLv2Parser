@@ -13,7 +13,6 @@ PROHIBITED_LICENSES = {
     "IPL-1.0", "MS-PL", "MPL-1.0", "MPL-1.1", "MPL-2.0",
     "OSL-3.0", "SSPL-1.0",
     "Unlicense", "WTFPL", "Zlib-acknowledgement"
-
 }
 
 # Expected header (as string)
@@ -46,15 +45,6 @@ REQUIRED_HEADER = """/**********************************************************
  *  Hisashi Miyashita, Maplesoft/Mgnite
  *
  *****************************************************************************/"""
-
-scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
-if not os.path.exists(scancode_results_dir):
-    print(f"Error: Directory '{scancode_results_dir}' not found.")
-    sys.exit(1)
-
-if not os.listdir(scancode_results_dir):
-    print(f"Warning: Directory '{scancode_results_dir}' is empty. No scan results available.")
-    sys.exit(0)
 
 def load_scancode_results(scancode_results_dir):
     """
@@ -96,11 +86,7 @@ def check_licenses(scan_results):
                         "license": license_id or license_expression
                     })
 
-    # Debug-Ausgabe: Anzeigen, was in die Liste prohibited_files geschrieben wird
-    print("[DEBUG] Inhalt der Liste prohibited_files:")
-    for entry in prohibited_files:
-        print(f"- Datei: {entry['file']}, Lizenz: {entry['license']}")
-
+    return prohibited_files
 
 def check_header(file_path, required_header):
     """
@@ -117,17 +103,9 @@ def main():
     scancode_results_dir = os.getenv("SCANCODE_RESULTS_DIR")
     g4_files_list_path = os.getenv("G4_FILES_LIST")
 
-    # Debug-Ausgabe: Anzeigen der geladenen Scan-Ergebnisse
-    print("[DEBUG] Geladene Scan-Ergebnisse:")
-    for result in scan_results:
-        print(json.dumps(result, indent=2))
-
     if not scancode_results_dir or not g4_files_list_path:
         print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST' not set.")
         sys.exit(1)
-
-    print(f"Debug: SCANCODE_RESULTS_DIR={scancode_results_dir}")
-    print(f"Debug: G4_FILES_LIST={g4_files_list_path}")
 
     # Load ScanCode results
     scan_results = load_scancode_results(scancode_results_dir)
@@ -145,8 +123,8 @@ def main():
 
     # Create report
     report = {
-        "file contains prohibited_licenses": prohibited_files,
-        "file does not contain project license header, please insert missing_headers": header_missing_files,
+        "prohibited_licenses": prohibited_files,
+        "missing_headers": header_missing_files,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
@@ -163,4 +141,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
