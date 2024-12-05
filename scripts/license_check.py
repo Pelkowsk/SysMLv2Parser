@@ -16,6 +16,8 @@ PROHIBITED_LICENSES = {
 
 }
 
+PROHIBITED_LICENSES = [license.casefold() for license in PROHIBITED_LICENSES]
+
 # Expected header (as string)
 REQUIRED_HEADER = """/*****************************************************************************
  * SysML 2 Pilot Implementation
@@ -74,22 +76,29 @@ def load_scancode_results(scancode_results_dir):
     return results
 
 def check_licenses(scan_results):
-    """
-    Checks the scan results for prohibited licenses.
-    :param scan_results: List of scan results.
-    :return: List of files with prohibited licenses.
-    """
     prohibited_files = []
+    all_checked_licenses = []
+
     for result in scan_results:
         for file in result.get("files", []):
             for license_info in file.get("licenses", []):
-                license_id = license_info.get("spdx_license_key", "")
-                if license_id in PROHIBITED_LICENSES:
+                license_id = license_info.get("spdx_license_key", "").casefold()
+                license_expression = license_info.get("license_expression_spdx", "").casefold()
+
+                all_checked_licenses.append({
+                    "file": file["path"],
+                    "license_id": license_id,
+                    "license_expression": license_expression
+                })
+
+                if license_id in PROHIBITED_LICENSES or \
+                        any(prohibited in license_expression for prohibited in PROHIBITED_LICENSES):
                     prohibited_files.append({
                         "file": file["path"],
-                        "license": license_id
+                        "license": license_id or license_expression
                     })
-    return prohibited_files
+
+    return prohibited_files, all_checked_licenses
 
 def check_header(file_path, required_header):
     """
@@ -117,7 +126,7 @@ def main():
     scan_results = load_scancode_results(scancode_results_dir)
 
     # Check for prohibited licenses
-    prohibited_files = check_licenses(scan_results)
+    prohibited_files, all_checked_licenses = check_licenses(scan_results)
 
     # Check headers in .g4 files
     header_missing_files = []
@@ -131,6 +140,7 @@ def main():
     report = {
         "file contains prohibited_licenses": prohibited_files,
         "file does not contain project license header, please insert missing_headers": header_missing_files,
+        "List of all checked licenses": all_checked_licenses,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
