@@ -140,6 +140,7 @@ def write_report(prohibited_files, missing_headers, output_report_path):
         json.dump(report, report_file, indent=2)
     print(f"Report written to {output_report_path}")
 
+
 def main():
     scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
     g4_files_list_path = os.getenv('G4_FILES_LIST')
@@ -166,15 +167,15 @@ def main():
     }
 
     # Report speichern
-    with open(output_report_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
+    write_report(prohibited_files, header_missing_files, output_report_path)
 
     # Pipeline-Status basierend auf den Ergebnissen setzen
     if report["status"] == "failure":
         print(f"Failure: Prohibited licenses or missing headers found. See '{output_report_path}' for details.")
         sys.exit(1)
     else:
-        print(f"Success: No prohibited licenses and all required headers found. '{output_report_path}' ")
+        print("Success: No prohibited licenses and all required headers found.")
+
 
 if __name__ == "__main__":
     main()
