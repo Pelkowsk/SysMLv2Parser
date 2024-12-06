@@ -136,7 +136,7 @@ def main():
     prohibited_files = find_prohibited_licenses_in_content(combined_content)
 
     # Überprüfen, ob die .g4-Dateien den erforderlichen Lizenzheader enthalten
-    header_missing_files = check_g4_files_for_license_header(g4_files_list_path, REQUIRED_HEADER)
+    header_missing_files = check_g4_files_for_license_header(g4_files_list_path, "REQUIRED_HEADER")
 
     # Report erstellen
     report = {
