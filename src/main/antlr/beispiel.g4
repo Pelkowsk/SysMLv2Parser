@@ -27,15 +27,7 @@
  *  Hisashi Miyashita, Maplesoft/Mgnite
  *
  *****************************************************************************/
-/*"agpl-1.0-only", "agpl-1.0-or-later", "agpl-3.0-only", "agpl-3.0-or-later",
-    "bittorrent-1.0", "bittorrent-1.1",
-    "cc-by-nc-1.0", "cc-by-nc-2.0", "cc-by-nc-2.5", "cc-by-nc-3.0", "cc-by-nc-4.0",
-    "cc-by-nc-nd-1.0", "cc-by-nc-nd-2.0", "cc-by-nc-nd-2.5", "cc-by-nc-nd-3.0", "cc-by-nc-nd-4.0",
-    "cc-by-nc-sa-1.0", "cc-by-nc-sa-2.0", "cc-by-nc-sa-2.5", "cc-by-nc-sa-3.0", "cc-by-nc-sa-4.0",
-    "cpal-1.0", "epl-1.0", "epl-2.0", "eupl-1.1", "eupl-1.2",
-    "ipl-1.0", "ms-pl", "mpl-1.0", "mpl-1.1", "mpl-2.0",
-    "osl-3.0", "sspl-1.0",
-    "unlicense", "wtfpl", "zlib-acknowledgement"*/
+/*"GPL-2.0-only", "MPL-1.1", "EPL-1.0", "CDDL-1.0", "Apache-1.1", "MS-PL", "APSL-2.0", "Artistic-1.0", "SPL-1.0", "NPL-1.1"*/
 
 grammar beispiel;
 
