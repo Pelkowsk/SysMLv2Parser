@@ -46,14 +46,6 @@ REQUIRED_HEADER = """/**********************************************************
 *
 *****************************************************************************/"""
 
-scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
-g4_files_list = os.getenv('G4_FILES_LIST')
-
-if not scancode_results_dir or not g4_files_list:
-    print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST' not set.")
-    sys.exit(1)
-
-
 def load_scancode_results_as_string(scancode_results_dir):
     """
     Lädt den gesamten Inhalt aller ScanCode-Ergebnisdateien als einen einzigen String in Kleinbuchstaben.
@@ -83,19 +75,19 @@ def find_prohibited_licenses_in_content(content):
             found_licenses.append(license)
     return found_licenses
 
-def check_g4_files_for_license_header(g4_files_list, required_header):
+def check_g4_files_for_license_header(g4_files_list_path, required_header):
     """
     Überprüft, ob die in der Liste angegebenen .g4-Dateien den erforderlichen Lizenzheader enthalten.
-    :param g4_files_list: Pfad zur Datei mit der Liste der .g4-Dateien.
+    :param g4_files_list_path: Pfad zur Datei mit der Liste der .g4-Dateien.
     :param required_header: Erwarteter Lizenzheader als Zeichenkette.
     :return: Liste der Dateien ohne den erforderlichen Lizenzheader.
     """
-    if not os.path.exists(g4_files_list):
-        print(f"Error: File list '{g4_files_list}' not found.")
+    if not os.path.exists(g4_files_list_path):
+        print(f"Error: File list '{g4_files_list_path}' not found.")
         sys.exit(1)
 
     missing_headers = []
-    with open(g4_files_list, "r") as file_list:
+    with open(g4_files_list_path, "r") as file_list:
         for filepath in file_list:
             filepath = filepath.strip()
             if filepath and os.path.exists(filepath):
@@ -131,11 +123,11 @@ def write_report(prohibited_files, missing_headers, output_report_path):
 
 def main():
     scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
-    g4_files_list = os.getenv('g4_files_list')
+    g4_files_list_path = os.getenv('G4_FILES_LIST_PATH')
     output_report_path = os.getenv('OUTPUT_REPORT_PATH', 'license_and_header_check_report.json')
 
-    if not scancode_results_dir or not g4_files_list:
-        print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'g4_files_list' not set.")
+    if not scancode_results_dir or not g4_files_list_path:
+        print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST_PATH' not set.")
         sys.exit(1)
 
     # Gesamten Inhalt der ScanCode-Ergebnisdateien einlesen und in Kleinbuchstaben umwandeln
@@ -145,7 +137,7 @@ def main():
     prohibited_files = find_prohibited_licenses_in_content(combined_content)
 
     # Überprüfen, ob die .g4-Dateien den erforderlichen Lizenzheader enthalten
-    header_missing_files = check_g4_files_for_license_header(g4_files_list, REQUIRED_HEADER)
+    header_missing_files = check_g4_files_for_license_header(g4_files_list_path, REQUIRED_HEADER)
 
     # Report erstellen
     report = {
