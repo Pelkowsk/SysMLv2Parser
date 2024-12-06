@@ -45,6 +45,18 @@ REQUIRED_HEADER = """/**********************************************************
 *  Hisashi Miyashita, Maplesoft/Mgnite
 *
 *****************************************************************************/"""
+# Sicherstellen, dass die Umgebungsvariable geladen wird
+scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
+
+if not scancode_results_dir:
+    print("Error: Environment variable 'SCANCODE_RESULTS_DIR' not set.")
+    sys.exit(1)
+
+# Sicherstellen, dass die Umgebungsvariable geladen wird
+g4_files_list_path = os.getenv('G4_FILES_LIST')
+
+
+
 
 def load_scancode_results_as_string(scancode_results_dir):
     """
@@ -123,7 +135,7 @@ def write_report(prohibited_files, missing_headers, output_report_path):
 
 def main():
     scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
-    g4_files_list_path = os.getenv('G4_FILES_LIST_PATH')
+    g4_files_list_path = os.getenv('G4_FILES_LIST')
     output_report_path = os.getenv('OUTPUT_REPORT_PATH', 'license_and_header_check_report.json')
 
     if not scancode_results_dir or not g4_files_list_path:
