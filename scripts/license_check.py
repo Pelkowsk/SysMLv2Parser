@@ -63,16 +63,24 @@ def find_prohibited_licenses_in_content(content):
             found_licenses.append(license)
     return found_licenses
 
-def check_g4_files_for_license_header(g4_files_list_path, required_header):
+def check_g4_files_for_license_header(g4_files_list_path, header_variable_name="REQUIRED_HEADER"):
     """
     Überprüft, ob die in der Liste angegebenen .g4-Dateien den erforderlichen Lizenzheader enthalten.
     :param g4_files_list_path: Pfad zur Datei mit der Liste der .g4-Dateien.
-    :param required_header: Erwarteter Lizenzheader als Zeichenkette.
+    :param header_variable_name: Name der Variablen, die den erwarteten Lizenzheader enthält.
     :return: Liste der Dateien ohne den erforderlichen Lizenzheader.
     """
     if not os.path.exists(g4_files_list_path):
         print(f"Error: File list '{g4_files_list_path}' not found.")
         sys.exit(1)
+
+    # Header aus der globalen Namespace-Variable holen
+    required_header = globals().get(header_variable_name, None)
+    if required_header is None:
+        raise ValueError(f"Die Header-Variable '{header_variable_name}' ist nicht definiert.")
+
+    # Normalisierung des Headers
+    normalized_required_header = " ".join(required_header.split())
 
     missing_headers = []
     with open(g4_files_list_path, "r") as file_list:
@@ -82,7 +90,9 @@ def check_g4_files_for_license_header(g4_files_list_path, required_header):
                 try:
                     with open(filepath, "r", encoding="utf-8") as file:
                         content = file.read()
-                        if required_header not in content:
+                        # Normalisierung des Dateiinhalts
+                        normalized_content = " ".join(content.split())
+                        if normalized_required_header not in normalized_content:
                             missing_headers.append(filepath)
                 except Exception as e:
                     print(f"Error reading file '{filepath}': {e}")
@@ -91,6 +101,7 @@ def check_g4_files_for_license_header(g4_files_list_path, required_header):
                 print(f"Warning: File '{filepath}' does not exist.")
                 missing_headers.append(filepath)
     return missing_headers
+
 
 def write_report(prohibited_files, missing_headers, output_report_path):
     """
