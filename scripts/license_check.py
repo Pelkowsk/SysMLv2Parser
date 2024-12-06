@@ -174,7 +174,7 @@ def main():
         print(f"Failure: Prohibited licenses or missing headers found. See '{output_report_path}' for details.")
         sys.exit(1)
     else:
-        print("Success: No prohibited licenses and all required headers found.")
+        print(f"Success: No prohibited licenses and all required headers found. '{output_report_path}' ")
 
 if __name__ == "__main__":
     main()
