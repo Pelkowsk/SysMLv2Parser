@@ -24,7 +24,7 @@
  *  Ed Seidewitz, MDS
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
- *  Hisashi Miyashita, Maplesoft/Mgnite
+ *  Hisashi Miyashita, Maplesoft/Mgnit
  *
  *****************************************************************************/
 
