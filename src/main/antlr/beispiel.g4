@@ -73,7 +73,7 @@ grammar beispiel;
  *****************************************************************************/
 }
 
-start : expression ;
+start : expression;
 
 expression : NUMBER (additiveOperator NUMBER)* ;
 

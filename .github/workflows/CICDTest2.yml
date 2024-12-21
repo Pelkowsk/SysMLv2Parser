@@ -24,12 +24,6 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-     # - name: Debug file structure
-      #  run: |
-       #   echo "Current working directory:"
-        #  pwd
-       #  # echo "Listing all files in the repository:"
-          #ls -R
 
       - name: Download ANTLR
         run: |
@@ -83,3 +77,17 @@ jobs:
       - name: Verify Docker Image
         run: |
           echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
+
+  prepare-deployment:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Prepare Deployment Package
+        run: |
+          echo "Preparing deployment package..."
+          # Füge hier Befehle hinzu, um das Deployment-Paket zu erstellen
+          # z.B. Erstellen eines Archivs der gebauten Artefakte
