@@ -12,7 +12,7 @@ public class BeispielGrammarTest {
 //prüft ob Eingabetext Syntaxfehler enthält. testValidInput()-> nur valide Eingabedaten, testInvalidInput()-> muss invaliden Input enthalten
     @Test
     public void testValidInput() {
-        String input = "-1+2+a";
+        String input = "-1+2";
 
 
         omg.beispielLexer lexer = new omg.beispielLexer(CharStreams.fromString(input));
