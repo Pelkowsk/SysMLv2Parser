@@ -34,7 +34,7 @@
 
 
 
-grammar beispiel;
+grammar example;
 
 
 //include license text in generated files
