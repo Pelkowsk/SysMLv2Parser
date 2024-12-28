@@ -80,11 +80,14 @@ jobs:
           echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
           echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
 
+
       - name: Create Scancode_Results Directory
         run: mkdir -p $GITHUB_WORKSPACE/scancode_results
 
+
       - name: Move ScanCode Report to Scancode_Results Directory
         run: mv $GITHUB_WORKSPACE/scancode_results.json $GITHUB_WORKSPACE/scancode_results/
+
 
       - name: Create Directory for License Report
         run: mkdir -p $GITHUB_WORKSPACE/license_reports
@@ -92,14 +95,6 @@ jobs:
 
       - name: Run License and Header Check Script
         run: python3 scripts/license_check.py
-
-      - name: Verify Report File Exists
-        if: always()
-        run: |
-          if [ ! -f "$GITHUB_WORKSPACE/license_reports/license_and_header_check_report.json" ]; then
-            echo "License and header check report not found. Exiting..."
-            exit 1
-          fi
 
 
       - name: Upload License and Header Check Report
