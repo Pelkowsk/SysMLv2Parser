@@ -153,6 +153,7 @@ def main():
     output_report_path = os.getenv('OUTPUT_REPORT_PATH', '$GITHUB_WORKSPACE/license_reports/license_and_header_check_report.json')
 
 
+
     if not scancode_results_dir or not g4_files_list_path:
         print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST_PATH' not set.")
         sys.exit(1)

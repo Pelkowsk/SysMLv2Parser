@@ -107,7 +107,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: license-and-header-check-report-${{ env.TIMESTAMP }}
-          path: license_and_header_check_report.json
+          path: $GITHUB_WORKSPACE/license_reports/license_and_header_check_report.json
+
 
   build-and-grammartest:
     name: Build and Test
