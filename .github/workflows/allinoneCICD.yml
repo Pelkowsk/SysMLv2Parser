@@ -32,8 +32,8 @@ jobs:
       - name: Find All .g4 Files
         id: find_g4_files
         run: |
-          # Searches for all g4.files and saves them into g4_files.txt
-          find $GITHUB_WORKSPACE -name "*.g4" > g4_files.txt
+          # Searches for all g4.files and java.files and saves them into g4_files.txt
+          find $GITHUB_WORKSPACE \( -name "*.g4" -o -name "*.java" \) > g4_files.txt
           # count the number of g4.-files
           file_count=$(wc -l < g4_files.txt)
           echo "number of found .g4-files: $file_count"
