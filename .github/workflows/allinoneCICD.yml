@@ -95,7 +95,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: license-and-header-check-report-${{ env.TIMESTAMP }}
-          path: license_check_report.json
+          path: .
 
   build-and-grammartest:
     name: Build and Test
