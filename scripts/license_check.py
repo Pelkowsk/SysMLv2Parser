@@ -150,7 +150,8 @@ def write_report(prohibited_files, missing_headers, output_report_path):
 def main():
     scancode_results_dir = os.getenv('SCANCODE_RESULTS_DIR')
     g4_files_list_path = os.getenv('G4_FILES_LIST')
-    output_report_path = os.getenv('OUTPUT_REPORT_PATH', 'license_and_header_check_report.json')
+    output_report_path = os.getenv('OUTPUT_REPORT_PATH', '$GITHUB_WORKSPACE/license_reports/license_and_header_check_report.json')
+
 
     if not scancode_results_dir or not g4_files_list_path:
         print("Error: Environment variables 'SCANCODE_RESULTS_DIR' or 'G4_FILES_LIST_PATH' not set.")

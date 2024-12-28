@@ -86,6 +86,10 @@ jobs:
       - name: Move ScanCode Report to Scancode_Results Directory
         run: mv $GITHUB_WORKSPACE/scancode_results.json $GITHUB_WORKSPACE/scancode_results/
 
+      - name: Create Directory for License Report
+        run: mkdir -p $GITHUB_WORKSPACE/license_reports
+
+
       - name: Run License and Header Check Script
         run: python3 scripts/license_check.py
 
@@ -95,7 +99,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: license-and-header-check-report-${{ env.TIMESTAMP }}
-          path: .
+          path: $GITHUB_WORKSPACE/license_reports
 
   build-and-grammartest:
     name: Build and Test
