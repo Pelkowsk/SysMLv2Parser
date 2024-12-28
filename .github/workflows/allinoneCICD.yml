@@ -181,10 +181,10 @@ jobs:
 
       - name: Generate SBOM in SPDX Format
         run: |
-          # Create output directory for SBOM
-          mkdir -p $GITHUB_WORKSPACE/sbom
-          # Run ScanCode to generate SBOM in SPDX JSON format
-          scancode --info --license --copyright --package --spdx-tv $GITHUB_WORKSPACE/sbom/spdx_sbom.spdx 
+            # Create output directory for SBOM
+            mkdir -p $GITHUB_WORKSPACE/sbom
+            # Run ScanCode to generate SBOM in SPDX JSON format
+            scancode --info --license --copyright --package --spdx-json-pp $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
       - name: Commit and Push SBOM to Repository
         env:
