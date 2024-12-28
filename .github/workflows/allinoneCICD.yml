@@ -94,6 +94,7 @@ jobs:
         run: python3 scripts/license_check.py
 
       - name: Verify Report File Exists
+        if: always()
         run: |
           if [ ! -f "$GITHUB_WORKSPACE/license_reports/license_and_header_check_report.json" ]; then
             echo "License and header check report not found. Exiting..."
