@@ -165,9 +165,6 @@ jobs:
       - license-and-header-check
       - build-and-grammartest
 
-
-
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -187,7 +184,7 @@ jobs:
           # Create output directory for SBOM
           mkdir -p $GITHUB_WORKSPACE/sbom
           # Run ScanCode to generate SBOM in SPDX JSON format
-          scancode --spdx-json-pp $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
+          scancode --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
       - name: Commit and Push SBOM to Repository
         env:
