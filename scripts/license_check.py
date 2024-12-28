@@ -142,6 +142,9 @@ def write_report(prohibited_files, missing_headers, output_report_path):
         "status": "success" if not prohibited_files and not missing_headers else "failure"
     }
 
+    # Sicherstellen, dass das Zielverzeichnis existiert
+    os.makedirs(os.path.dirname(output_report_path), exist_ok=True)
+
     with open(output_report_path, "w", encoding="utf-8") as report_file:
         json.dump(report, report_file, indent=2)
     print(f"Report written to {output_report_path}")
