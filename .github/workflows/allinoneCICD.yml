@@ -47,7 +47,7 @@ jobs:
           fi
         shell: bash
 
-      - name: Create Temporary Directory For .g4 Files
+      - name: Create Temporary Directory For Files
         run: mkdir -p $GITHUB_WORKSPACE/temp_g4_files
         shell: bash
 
@@ -67,13 +67,13 @@ jobs:
       - name: Run ScanCode Toolkit On Files
         if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
-          scancode -cl --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
+          scancode -clip --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
       - name: Upload ScanCode Reports
         uses: actions/upload-artifact@v4
         with:
-          name: scancode-reports-${{ env.TIMESTAMP }}
+          name: scancode-reports${{ env.TIMESTAMP }}
           path: scancode_results.json
 
 
