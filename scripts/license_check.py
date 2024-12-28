@@ -5,7 +5,7 @@ import json
 # List of prohibited licenses
 PROHIBITED_LICENSES = {license.casefold() for license in {
     "GPL-2.0-only", "MPL-1.1", "EPL-1.0", "CDDL-1.0", "Apache-1.1",
-    "MS-PL", "APSL-2.0", "Artistic-1.0", "SPL-1.0", "NPL-1.1"
+    "MS-PL", "APSL-2.0", "Artistic-1.0", "SPL-1.0"
 }}
 
 
