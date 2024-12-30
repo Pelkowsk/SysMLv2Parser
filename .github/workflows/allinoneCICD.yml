@@ -184,22 +184,13 @@ jobs:
         run: pwd
 
 
-      - name: Dynamically Generate .scancodeignore
-        run: |
-          echo "license_check.py" > $GITHUB_WORKSPACE/.scancodeignore
-          echo "ProjectProhibitedLicenses.txt" >> $GITHUB_WORKSPACE/.scancodeignore
-          
-
-      - name: Check .scancodeignore Contents
-        run: cat $GITHUB_WORKSPACE/.scancodeignore
-
 
       - name: Generate SBOM In SPDX Format
         run: |
             # Create output directory for SBOM
             mkdir -p $GITHUB_WORKSPACE/sbom
-            # Run ScanCode to generate SBOM in SPDX JSON format
-            scancode -clip --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
+            # Run ScanCode to generate SBOM in SPDX JSON format, without prohibited licenses
+            scancode -clip --ignore "license_check.py" --ignore "ProjectProhibitedLicenses.txt" --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
       - name: Commit And Push SBOM To Repository
         env:
