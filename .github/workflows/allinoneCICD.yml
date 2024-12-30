@@ -193,7 +193,7 @@ jobs:
             # Run ScanCode to generate SBOM in SPDX JSON format
             scancode -clip --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
-            - name: Commit And Push SBOM To Repository
+      - name: Commit And Push SBOM To Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
