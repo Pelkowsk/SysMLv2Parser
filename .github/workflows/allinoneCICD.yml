@@ -6,11 +6,7 @@ on:
       - master
     paths-ignore:
       - sbom.spdx.json
-  pull_request:
-    branches:
-      - master
-    paths-ignore:
-      - sbom.spdx.json
+
   workflow_dispatch:
 
 jobs:
