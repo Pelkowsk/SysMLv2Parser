@@ -3,7 +3,7 @@ SPDXVersion: SPDX-2.2
 DataLicense: CC0-1.0
 SPDXID: SPDXRef-DOCUMENT
 DocumentName: SPDX Document created by ScanCode Toolkit
-DocumentNamespace: http://spdx.org/spdxdocs/sysmlv2parser-406dab5f-2a0f-4903-b15f-0812e41d4412
+DocumentNamespace: http://spdx.org/spdxdocs/sysmlv2parser-47fe62fc-8b36-4e24-a011-c4fa438dae2a
 DocumentComment: <text>Generated with ScanCode and provided on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. No content created from
 ScanCode should be considered or used as legal advice. Consult an Attorney
@@ -15,14 +15,14 @@ SPDX License List: 3.25</text>
 ## Creation Information
 LicenseListVersion: 3.25
 Creator: Tool: scancode-toolkit 32.3.0
-Created: 2024-12-30T20:27:30Z
+Created: 2024-12-30T20:30:44Z
 
 ## Package Information
 PackageName: sysmlv2parser
 SPDXID: SPDXRef-001
 PackageDownloadLocation: NOASSERTION
 FilesAnalyzed: true
-PackageVerificationCode: e5b49fcefa1cc187d5e2cfface08ab37a8854cfe
+PackageVerificationCode: cd06e330be0a7fcea487e9d696092599a9711ba0
 PackageLicenseConcluded: NOASSERTION
 PackageLicenseInfoFromFiles: APSL-2.0
 PackageLicenseInfoFromFiles: Apache-1.1
@@ -60,7 +60,7 @@ Copyright 2015 the original author or authors
 ## File Information
 FileName: ./SysMLv2Parser/build.gradle.kts
 SPDXID: SPDXRef-2
-FileChecksum: SHA1: fdc0a122f0108e569247a0a7b6e2e85b75281ad6
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
 FileCopyrightText: <text>Copyright (c) 2018-2024 Model Driven Solutions, Inc.
@@ -73,7 +73,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/gradlew
 SPDXID: SPDXRef-3
-FileChecksum: SHA1: 0e59ccf04f8db22729ebef7ee39517a9e3a80c9d
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: Apache-2.0
 FileCopyrightText: <text>Copyright (c) 2015-2021 the original
@@ -82,7 +82,7 @@ FileCopyrightText: <text>Copyright (c) 2015-2021 the original
 ## File Information
 FileName: ./SysMLv2Parser/gradlew.bat
 SPDXID: SPDXRef-4
-FileChecksum: SHA1: af34fcc7be3785cc630c050708c540063bc95532
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: Apache-2.0
 FileCopyrightText: <text>Copyright 2015 the original author or authors
@@ -91,7 +91,7 @@ FileCopyrightText: <text>Copyright 2015 the original author or authors
 ## File Information
 FileName: ./SysMLv2Parser/ProjectLicenseHeader.txt
 SPDXID: SPDXRef-5
-FileChecksum: SHA1: b0d34b88e1b10508ddc270a429bf4751b0e61a27
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
 FileCopyrightText: <text>Copyright (c) 2018-2024 Model Driven Solutions, Inc.
@@ -104,7 +104,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/sbom.spdx.json
 SPDXID: SPDXRef-7
-FileChecksum: SHA1: 9e19b8360f1762a4c75734e18ec6d1ad26dc6d03
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: CC0-1.0
 LicenseInfoInFile: LicenseRef-scancode-scancode-acknowledgment
@@ -414,18 +414,27 @@ Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2015-2021 the original
 Copyright (c) 2015-2021 the original </text>
 Copyright (c) 2018 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
 Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019 Mgnite Inc.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
 Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2024-2025 Your Organization
 Copyright 2015 the original author or authors
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2015-2021 the original </text>
 Copyright 2015 the original author or authors
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
-Copyright (c) 2018 IncQuery Labs Ltd.
-Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
-Copyright (c) 2019 Mgnite Inc.
-Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2015-2021 the original
 Copyright (c) 2015-2021 the original </text>
 Copyright (c) 2018 IncQuery Labs Ltd.
@@ -457,6 +466,21 @@ Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019 Mgnite Inc.
 Copyright (c) 2024 Dein Name / Deine Organisation
 Copyright (c) 2015-2021 the original
+Copyright (c) 2015-2021 the original </text>
+Copyright (c) 2018 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019 Mgnite Inc.
+Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright 2015 the original author or authors
+Copyright (c) 2015-2021 the original </text>
+Copyright 2015 the original author or authors
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018 IncQuery Labs Ltd.
+Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019 Mgnite Inc.
+Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2015-2021 the original
 Copyright (c) 2018 IncQuery Labs Ltd.
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
 Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
@@ -545,6 +569,26 @@ Copyright (c) 2018 IncQuery Labs Ltd.
 Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019 Mgnite Inc.
 Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
 Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
@@ -830,7 +874,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/settings.gradle.kts
 SPDXID: SPDXRef-9
-FileChecksum: SHA1: e549823ea1d178aa4a002964c340b445ff1d606e
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
 FileCopyrightText: <text>Copyright (c) 2018-2024 Model Driven Solutions, Inc.
@@ -843,7 +887,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/.github/workflows/allinoneCICD.yml
 SPDXID: SPDXRef-12
-FileChecksum: SHA1: 0dd4b6ae033b8ffb4a6240c2968a65bf1bcaa463
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: MIT
 FileCopyrightText: NONE
@@ -851,7 +895,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/.idea/ANTLRv4ToolGrammarProperties.xml
 SPDXID: SPDXRef-14
-FileChecksum: SHA1: 0109cc6eb0f736ae9071573e7711c8a92f7c43db
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -859,7 +903,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/.idea/gradle.xml
 SPDXID: SPDXRef-15
-FileChecksum: SHA1: 6b31902834a17a0a3cacfa56056f5ff6b7a78fec
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -867,7 +911,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/.idea/misc.xml
 SPDXID: SPDXRef-16
-FileChecksum: SHA1: 8a22499c184c46c96cd270f0f2cc4053008bee66
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -875,7 +919,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/.idea/uiDesigner.xml
 SPDXID: SPDXRef-17
-FileChecksum: SHA1: 47c0ade20214f1dfce789c3c99fa4e427533748f
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -883,7 +927,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/.idea/vcs.xml
 SPDXID: SPDXRef-18
-FileChecksum: SHA1: c92f3eb0ad1c70371e177a4d7d741f90af3f902c
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -891,7 +935,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/gradle/wrapper/gradle-wrapper.jar
 SPDXID: SPDXRef-21
-FileChecksum: SHA1: 251364b90b8f139c16eb5d5ce376dfa697cba6cd
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -899,7 +943,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/gradle/wrapper/gradle-wrapper.properties
 SPDXID: SPDXRef-22
-FileChecksum: SHA1: 61362c54ea84b1c5aa59ae2bfcebeba3966d8694
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
 FileCopyrightText: NONE
@@ -907,7 +951,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/src/main/antlr/example.g4
 SPDXID: SPDXRef-26
-FileChecksum: SHA1: 48ae831360c2d6cc34d0fd9ccde21332fb8e5078
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
 FileCopyrightText: <text>Copyright (c) 2018-2024 Model Driven Solutions, Inc.
@@ -925,7 +969,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/src/test/java/org/example/GrammarTest.java
 SPDXID: SPDXRef-31
-FileChecksum: SHA1: d1b8eed10e9074e722be82ba40fc1454618d9ba6
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
 FileCopyrightText: <text>Copyright (c) 2018-2024 Model Driven Solutions, Inc.
