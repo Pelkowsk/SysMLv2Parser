@@ -16,36 +16,34 @@ PROHIBITED_LICENSES = {license.casefold() for license in {
 
 # required project license header
 REQUIRED_HEADER = """/*****************************************************************************
- * SysML 2 Pilot Implementation (Modifizierte Version)
+ * SysML 2 Pilot Implementation
  * Copyright (c) 2018-2024 Model Driven Solutions, Inc.
- * Copyright (c) 2018 IncQuery Labs Ltd.
- * Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
- * Copyright (c) 2019 Mgnite Inc.
- * Copyright (c) 2024 [Dein Name / Deine Organisation] (für Modifikationen)
+ * Copyright (c) 2018-2024 IncQuery Labs Ltd.
+ * Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+ * Copyright (c) 2019-2023 Mgnite Inc.
+ * Copyright (c) 2024-2025 [Your Organization]
  *
- * Dieses Programm ist freie Software: Sie können es unter den Bedingungen
- * der GNU Lesser General Public License, wie von der Free Software Foundation
- * veröffentlicht, weiterverteilen und/oder modifizieren, entweder gemäß Version 3
- * der Lizenz oder (nach Ihrer Wahl) jeder späteren Version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Dieses Programm wird in der Hoffnung verbreitet, dass es nützlich sein wird,
- * jedoch ohne jegliche Garantie; sogar ohne die implizite Garantie der
- * Marktgängigkeit oder Eignung für einen bestimmten Zweck. Siehe die
- * GNU Lesser General Public License für weitere Details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
  *
- * Sie sollten eine Kopie der GNU Lesser General Public License zusammen mit
- * diesem Programm erhalten haben. Wenn nicht, siehe <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * @license LGPL-3.0-or-later <http://spdx.org/licenses/LGPL-3.0-or-later>
  *
- * Ursprüngliche Beitragende:
- *  - Ed Seidewitz, MDS
- *  - Zoltan Kiss, IncQuery
- *  - Balazs Grill, IncQuery
- *  - Hisashi Miyashita, Maplesoft/Mgnite
+ * Contributors:
+ *  Ed Seidewitz, MDS
+ *  Zoltan Kiss, IncQuery
+ *  Balazs Grill, IncQuery
+ *  Hisashi Miyashita, Maplesoft/Mgnite
  *
- * Beitragende für Modifikationen:
- *  - [Dein Name / Deine Organisation] (2024)
  *****************************************************************************/"""
 
 

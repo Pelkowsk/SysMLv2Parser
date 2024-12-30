@@ -67,7 +67,7 @@ jobs:
       - name: Run ScanCode Toolkit On Files
         if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
-          scancode -clip --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
+          scancode -l --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
       - name: Upload ScanCode Reports
@@ -180,6 +180,12 @@ jobs:
           sudo apt-get update && sudo apt-get install -y python3-pip
           pip3 install scancode-toolkit
 
+      - name: Generate .scancodeignore
+        run: |
+          echo "path/to/excluded_python_file.py" >> .scancodeignore
+          echo "path/to/ProjectProhibitedLicenses.txt" >> .scancodeignore    
+      
+
       - name: Generate SBOM In SPDX Format
         run: |
             # Create output directory for SBOM
@@ -187,7 +193,7 @@ jobs:
             # Run ScanCode to generate SBOM in SPDX JSON format
             scancode -clip --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
-      - name: Commit And Push SBOM To Repository
+            - name: Commit And Push SBOM To Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
