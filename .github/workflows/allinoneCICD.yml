@@ -73,7 +73,7 @@ jobs:
       - name: Upload ScanCode Reports
         uses: actions/upload-artifact@v4
         with:
-          name: scancode-reports${{ env.TIMESTAMP }}
+          name: scancode-reports-${{ env.TIMESTAMP }}
           path: scancode_results.json
 
 
@@ -112,7 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: license-and-header-check
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup JDK 17
@@ -120,12 +120,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+        # licensed by MIT License
 
       - name: Download ANTLR
         run: |
           curl -o antlr-4.13.0-complete.jar https://www.antlr.org/download/antlr-4.13.0-complete.jar
 
-      - name: Search and Generate Lexer and Parser for all .g4 files
+      - name: Search And Generate Lexer And Parser For All .g4 Files
         run: |
           echo "Searching for .g4 files in the entire project..."
           files=$(find . -type f -name "*.g4")
@@ -169,7 +170,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set Up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
@@ -179,14 +180,14 @@ jobs:
           sudo apt-get update && sudo apt-get install -y python3-pip
           pip3 install scancode-toolkit
 
-      - name: Generate SBOM in SPDX Format
+      - name: Generate SBOM In SPDX Format
         run: |
             # Create output directory for SBOM
             mkdir -p $GITHUB_WORKSPACE/sbom
             # Run ScanCode to generate SBOM in SPDX JSON format
-            scancode --info --license --copyright --package --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
+            scancode -clip --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
-      - name: Commit and Push SBOM to Repository
+      - name: Commit And Push SBOM To Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
