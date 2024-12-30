@@ -180,10 +180,12 @@ jobs:
           sudo apt-get update && sudo apt-get install -y python3-pip
           pip3 install scancode-toolkit
 
-      - name: Generate .scancodeignore
+      - name: Dynamically Generate .scancodeignore
         run: |
-          echo "path/to/excluded_python_file.py" >> .scancodeignore
-          echo "path/to/ProjectProhibitedLicenses.txt" >> .scancodeignore    
+          # Dynamisch die Dateien hinzufügen, die ignoriert werden sollen
+          echo "excluded_directory/" > $GITHUB_WORKSPACE/.scancodeignore
+          echo "path/to/excluded_python_file.py" >> $GITHUB_WORKSPACE/.scancodeignore
+          echo "path/to/excluded_license_file.txt" >> $GITHUB_WORKSPACE/.scancodeignore    
       
 
       - name: Generate SBOM In SPDX Format
