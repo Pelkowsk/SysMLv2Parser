@@ -184,7 +184,7 @@ jobs:
             # Create output directory for SBOM
             mkdir -p $GITHUB_WORKSPACE/sbom
             # Run ScanCode to generate SBOM in SPDX JSON format, without prohibited licenses
-            scancode -clip --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
+            scancode -clip --ignore "scripts/license_check.py" --ignore "ProjectProhibitedLicenses.txt" --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
 
       - name: Set Timestamp
         id: timestamp
