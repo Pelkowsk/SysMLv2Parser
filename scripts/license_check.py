@@ -7,7 +7,7 @@ PROHIBITED_LICENSES = {license.casefold() for license in {
     "GPL-2.0-only", "MPL-1.1", "EPL-1.0", "CDDL-1.0", "Apache-1.1",
     "MS-PL", "APSL-2.0", "Artistic-1.0", "SPL-1.0", "QPL-1.0",
     "ZPL-2.0", "NPL-1.1", "CPAL-1.0", "Sleepycat", "SSPL-1.0", "EPL-2.0",
-    "CC-BY-SA-4.0", "OFL-1.1", "JSON", "PHP-3.01", "OpenSSL", "NCSA",
+    "CC-BY-SA-4.0", "OFL-1.1", "PHP-3.01", "OpenSSL", "NCSA",
     "Reciprocal Public License 1.5"
 
 }}
