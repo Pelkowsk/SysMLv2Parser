@@ -180,6 +180,10 @@ jobs:
           sudo apt-get update && sudo apt-get install -y python3-pip
           pip3 install scancode-toolkit
 
+      - name: Print Working Directory
+        run: pwd
+
+
       - name: Dynamically Generate .scancodeignore
         run: |
           # makes sure the prohibited licenses will be ignored
