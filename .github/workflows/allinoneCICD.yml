@@ -8,7 +8,6 @@ on:
       - sbom.spdx.json
   pull_request:
     branches:
-      - master
       - production
 
   workflow_dispatch:
