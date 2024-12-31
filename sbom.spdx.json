@@ -3,7 +3,7 @@ SPDXVersion: SPDX-2.2
 DataLicense: CC0-1.0
 SPDXID: SPDXRef-DOCUMENT
 DocumentName: SPDX Document created by ScanCode Toolkit
-DocumentNamespace: http://spdx.org/spdxdocs/sysmlv2parser-ed59e3f1-3c84-4fb7-be85-fcc91a0525ad
+DocumentNamespace: http://spdx.org/spdxdocs/sysmlv2parser-5169aa25-0fc9-4feb-b69a-cd8efae192f0
 DocumentComment: <text>Generated with ScanCode and provided on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. No content created from
 ScanCode should be considered or used as legal advice. Consult an Attorney
@@ -15,14 +15,14 @@ SPDX License List: 3.25</text>
 ## Creation Information
 LicenseListVersion: 3.25
 Creator: Tool: scancode-toolkit 32.3.0
-Created: 2024-12-31T01:35:15Z
+Created: 2024-12-31T01:53:30Z
 
 ## Package Information
 PackageName: sysmlv2parser
 SPDXID: SPDXRef-001
 PackageDownloadLocation: NOASSERTION
 FilesAnalyzed: true
-PackageVerificationCode: 1c5e1ae7ab4a603f87b927a76dbe744ac163edab
+PackageVerificationCode: 87230a19d16479fac858aa22f1ae17b3ec8b4f50
 PackageLicenseConcluded: NOASSERTION
 PackageLicenseInfoFromFiles: APSL-2.0
 PackageLicenseInfoFromFiles: Apache-1.1
@@ -133,7 +133,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/sbom.spdx.json
 SPDXID: SPDXRef-9
-FileChecksum: SHA1: 4fa93cce76b29b8405f33cf5c1f8df4ee056b0a9
+FileChecksum: SHA1: 96c23d841d606cbf75ec08d88e10ce24b684d468
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: CC0-1.0
 LicenseInfoInFile: LicenseRef-scancode-scancode-acknowledgment
@@ -235,6 +235,33 @@ Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019-2023 Mgnite Inc.
 Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2015-2021 the original
+Copyright (c) 2015-2021 the original </text>
+Copyright (c) 2018 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019 Mgnite Inc.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2024-2025 Your Organization
+Copyright 2015 the original author or authors
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2015-2021 the original </text>
+Copyright 2015 the original author or authors
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2015-2021 the original
 Copyright (c) 2015-2021 the original </text>
 Copyright (c) 2018 IncQuery Labs Ltd.
@@ -777,6 +804,31 @@ Copyright (c) 2018 IncQuery Labs Ltd.
 Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019 Mgnite Inc.
 Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
 Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
@@ -1255,7 +1307,7 @@ Copyright (c) 2024-2025 Your Organization
 ## File Information
 FileName: ./SysMLv2Parser/.github/workflows/allinoneCICD.yml
 SPDXID: SPDXRef-13
-FileChecksum: SHA1: cb42cc55ecf5ca6b9830acc1553c5b8ecee3b9e3
+FileChecksum: SHA1: 61d124685f4298ca348068f02763847b01f9cd5a
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: MIT
 FileCopyrightText: NONE
