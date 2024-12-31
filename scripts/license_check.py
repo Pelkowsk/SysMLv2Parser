@@ -140,7 +140,7 @@ def write_report(prohibited_files, missing_headers, output_report_path):
     """
     report = {
         "These files contain prohibited licenses": prohibited_files,
-        "These files do not contain the project license header; please insert missing headers": missing_headers,
+        "These files do not contain the project license header; please insert missing headers in": missing_headers,
         "status": "success" if not prohibited_files and not missing_headers else "failure"
     }
 
@@ -175,7 +175,7 @@ def main():
     # set up report
     report = {
         "These files contain prohibited licenses": prohibited_files,
-        "These files do not contain the project license header; please insert missing headers": header_missing_files,
+        "These files do not contain the project license header; please insert missing headers in": header_missing_files,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
 
