@@ -74,8 +74,8 @@ jobs:
       - name: Upload ScanCode Reports
         uses: actions/upload-artifact@v4
         with:
-          name: scancode-reports-${{ env.TIMESTAMP }}
-          path: scancode_result.json
+          name: scancode-report-${{ env.TIMESTAMP }}
+          path: scancode_results.json
 
 
       - name: Set Environment Variables
