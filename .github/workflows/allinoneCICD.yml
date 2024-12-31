@@ -194,12 +194,6 @@ jobs:
         id: timestamp
         run: echo "TIMESTAMP=$(date +'%d.%m.%Y-%H-%M-%S')" >> $GITHUB_ENV
 
-      - name: Upload SBOM as Artifact
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-            name: SBOM
-            path: $GITHUB_WORKSPACE/sbom/sbom.spdx.json
 
       - name: Commit And Push SBOM To Repository
         if: github.event_name == 'push'
