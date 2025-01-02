@@ -122,7 +122,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-        # licensed by MIT License
+        # licensed by MIT LICENSE
 
       - name: Download ANTLR
         run: |
