@@ -3,11 +3,15 @@ name: CI/CDPipeline
 on:
   push:
     branches:
-      - master
+      - develop
+    paths-ignore:
+      - sbom.spdx.json
   pull_request:
     branches:
-      - master
+      - production
+
   workflow_dispatch:
+
 
 jobs:
 
@@ -16,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -29,15 +33,15 @@ jobs:
           sudo apt-get update && sudo apt-get install -y python3-pip
           pip3 install scancode-toolkit
 
-      - name: Find all .g4 files
+      - name: Find All .g4 And .java Files
         id: find_g4_files
         run: |
-          # Suche nach allen .g4-Dateien und speichere die Pfade in g4_files.txt
-          find $GITHUB_WORKSPACE -name "*.g4" > g4_files.txt
-          # Zähle die Anzahl der gefundenen Dateien
+          # Searches for all g4.files and java.files and saves them into g4_files.txt
+          find $GITHUB_WORKSPACE \( -name "*.g4" -o -name "*.java" \) > g4_files.txt
+          # count the number of g4.-files
           file_count=$(wc -l < g4_files.txt)
-          echo "Anzahl der gefundenen .g4-Dateien: $file_count"
-          # Setze den Output-Wert 'files_found' entsprechend
+          echo "number of found .g4-files: $file_count"
+          # check if files-count not zero and puts 'files_found' 
           if [ "$file_count" -gt 0 ]; then
             echo "files_found=true" >> "$GITHUB_OUTPUT"
           else
@@ -45,11 +49,11 @@ jobs:
           fi
         shell: bash
 
-      - name: Create temporary directory for .g4 files
+      - name: Create Temporary Directory For Files
         run: mkdir -p $GITHUB_WORKSPACE/temp_g4_files
         shell: bash
 
-      - name: Copy .g4 files to temporary directory
+      - name: Copy Files To Temporary Directory
         if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
           while IFS= read -r file; do
@@ -57,50 +61,60 @@ jobs:
           done < g4_files.txt
         shell: bash
 
-      - name: Set environment variables
-        run: |
-          echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
-          echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
 
       - name: Set Timestamp
         id: timestamp
         run: echo "TIMESTAMP=$(date +'%d.%m.%Y-%H-%M-%S')" >> $GITHUB_ENV
 
-      - name: Run ScanCode Toolkit on .g4 files
+      - name: Run ScanCode Toolkit On Files
         if: steps.find_g4_files.outputs.files_found == 'true'
         run: |
-          scancode -cl --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
+          scancode -l --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
-      - name: Upload ScanCode reports
+      - name: Upload ScanCode Reports
         uses: actions/upload-artifact@v4
         with:
-          name: scancode-reports-${{ env.TIMESTAMP }}
+          name: scancode-report-${{ env.TIMESTAMP }}
           path: scancode_results.json
 
-      - name: Create scancode_results directory
+
+      - name: Set Environment Variables
+        run: |
+          echo "SCANCODE_RESULTS_DIR=$GITHUB_WORKSPACE/scancode_results" >> $GITHUB_ENV
+          echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
+
+
+      - name: Create Scancode_Results Directory
         run: mkdir -p $GITHUB_WORKSPACE/scancode_results
 
-      - name: Move ScanCode report to scancode_results directory
+
+      - name: Move ScanCode Report to Scancode_Results Directory
         run: mv $GITHUB_WORKSPACE/scancode_results.json $GITHUB_WORKSPACE/scancode_results/
 
-      - name: Run license and header check script
+
+      - name: Create Directory for License Report
+        run: mkdir -p $GITHUB_WORKSPACE/license_reports
+
+
+      - name: Run License and Header Check Script
         run: python3 scripts/license_check.py
 
 
-      - name: Upload license and header check report
+      - name: Upload License and Header Check Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: license-and-header-check-report-${{ env.TIMESTAMP }}
-          path: license_check_report.json
+          path: $GITHUB_WORKSPACE/license_reports/license_and_header_check_report.json
+
 
   build-and-grammartest:
     name: Build and Test
     runs-on: ubuntu-latest
     needs: license-and-header-check
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup JDK 17
@@ -108,12 +122,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+        # licensed by MIT LICENSE
 
       - name: Download ANTLR
         run: |
           curl -o antlr-4.13.0-complete.jar https://www.antlr.org/download/antlr-4.13.0-complete.jar
 
-      - name: Search and Generate Lexer and Parser for all .g4 files
+      - name: Search And Generate Lexer And Parser For All .g4 Files
         run: |
           echo "Searching for .g4 files in the entire project..."
           files=$(find . -type f -name "*.g4")
@@ -141,46 +156,81 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ env.TIMESTAMP }}
+          name: grammartest-report-${{ env.TIMESTAMP }}
           path: build/reports/tests/test
 
 
 
-  docker-image-push:
-    name: Docker Operations
+  sbom-generation:
+    name: Generate And Push SBOM
     runs-on: ubuntu-latest
     needs:
-    - license-and-header-check
-    -  build-and-grammartest
+      - license-and-header-check
+      - build-and-grammartest
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup JDK 17
-        uses: actions/setup-java@v4
+      - name: Set Up Python
+        uses: actions/setup-python@v5
         with:
-          distribution: 'temurin'
-          java-version: 17
+          python-version: '3.x'
 
-      - name: Build Application (Gradle)
-        run: ./gradlew build --no-daemon
+      - name: Install ScanCode Toolkit
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-pip
+          pip3 install scancode-toolkit
 
-      - name: Log in to DockerHub
+
+      - name: Generate SBOM In SPDX Format
+        run: |
+            # Create output directory for SBOM
+            mkdir -p $GITHUB_WORKSPACE/sbom
+            # Run ScanCode to generate SBOM in SPDX JSON format, without prohibited licenses
+            scancode -clip --ignore "scripts/license_check.py" --ignore "ProjectProhibitedLicenses.txt" --spdx-tv $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE
+
+      - name: Set Timestamp
+        id: timestamp
+        run: echo "TIMESTAMP=$(date +'%d.%m.%Y-%H-%M-%S')" >> $GITHUB_ENV
+
+
+      - name: Commit And Push SBOM To Repository
+        if: github.event_name == 'push'
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.TOKEN_DOCKER_TESTMITGRADLE2 }}
-        run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-      - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest .
-
-      - name: Push Docker Image
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest
+          # Configure Git user
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Verify Docker Image
-        run: |
-          echo "Image pushed to DockerHub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/sysmlv2parser:latest"
+          # Copy SBOM to repository
+          cp $GITHUB_WORKSPACE/sbom/sbom.spdx.json $GITHUB_WORKSPACE/sbom.spdx.json
+
+          # Commit and push changes
+          git add sbom.spdx.json
+          git commit -m "Add SBOM (SPDX JSON) generated by ScanCode Toolkit${{ env.TIMESTAMP }}"
+          git push origin HEAD
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
