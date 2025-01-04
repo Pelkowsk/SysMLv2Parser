@@ -1,0 +1,36 @@
+name: License Compliance with FOSSology
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  fossology-scan:
+    name: Run FOSSology Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run FOSSology Docker Container
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/fossology_input \
+            fossology/fossology \
+            --upload-dir /fossology_input \
+            --analysis --report \
+            --report-format spdx2
+
+      - name: Save SPDX Report
+        run: |
+          mkdir -p reports
+          mv ${{ github.workspace }}/spdx2/* reports/
+
+      - name: Upload SPDX Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: fossology-spdx-report
+          path: reports/
