@@ -3,7 +3,7 @@ name: CI/CDPipeline
 on:
   push:
     branches:
-      - develop
+      - master
     paths-ignore:
       - sbom.spdx.json
   pull_request:
