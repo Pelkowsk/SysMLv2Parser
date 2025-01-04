@@ -126,8 +126,7 @@ jobs:
 
       - name: Download ANTLR
         run: |
-          curl -o antlr-4.13.0-complete.jar
-          https://www.antlr.org/download/antlr-4.13.0-complete.jar
+          curl -o antlr-4.13.0-complete.jar https://www.antlr.org/download/antlr-4.13.0-complete.jar
 
       - name: Search And Generate Lexer And Parser For All .g4 Files
         run: |
@@ -140,8 +139,7 @@ jobs:
           echo "Found .g4 files:"
           for file in $files; do
             echo "Processing $file..."
-            java -jar antlr-4.13.0-complete.jar 
-          -Dlanguage=Java -visitor -listener -package com.example.grammar "$file"
+            java -jar antlr-4.13.0-complete.jar -Dlanguage=Java -visitor -listener -package com.example.grammar "$file"
           done
 
       - name: Build Application (Gradle)
