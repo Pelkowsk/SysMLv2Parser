@@ -26,7 +26,7 @@
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- *  Jan Pelkowski von der Rosaroten Farm
+ *  "GPL-2.0-only"
  *****************************************************************************/
 
 
@@ -64,7 +64,7 @@ grammar example;
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- *  Jan Pelkowski von der Rosaroten Farm
+ *
  *****************************************************************************/
 }
 
