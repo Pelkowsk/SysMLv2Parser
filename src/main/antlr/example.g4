@@ -26,7 +26,7 @@
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- * pppp
+ *  Jan Pelkowski von der Rosaroten Farm
  *****************************************************************************/
 
 
