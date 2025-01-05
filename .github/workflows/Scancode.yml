@@ -1,0 +1,42 @@
+name: CI/CDPipeline
+
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  scancode:
+    name: ScanCode License Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install ScanCode Toolkit
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-pip
+          pip3 install scancode-toolkit
+
+      - name: Run ScanCode Toolkit
+        run: |
+          mkdir -p ./results
+          scancode --license --license-score 100 --json-pp ./results/scancode-report.json .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: scancode-result
+          path: ./results
+
+      - name: Artifact download
+        uses: actions/download-artifact@v4
+        with:
+          name: scancode-result
