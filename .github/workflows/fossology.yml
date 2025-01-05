@@ -31,7 +31,7 @@ jobs:
 
       - name: Download Scan Results (Optional)
         if: always()
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: scan-result
 
