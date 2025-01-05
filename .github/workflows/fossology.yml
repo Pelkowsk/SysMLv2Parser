@@ -32,16 +32,14 @@ jobs:
       - name: Run FOSSology Docker Container
         run: |
           docker run --rm \
-            --network host \
-            -e "FOSSOLOGY_DB_USER=fossy" \
-            -e "FOSSOLOGY_DB_PASSWORD=fossy" \
-            -e "FOSSOLOGY_DB_NAME=fossology" \
-            -e "FOSSOLOGY_DB_HOST=localhost" \
-            -v ${{ github.workspace }}:/fossology_input \
-            fossology/fossology \
-            --upload-dir /fossology_input \
-            --analysis --report \
-            --report-format spdx2
+         --network host \
+          -e "FOSSOLOGY_DB_USER=fossy" \
+          -e "FOSSOLOGY_DB_PASSWORD=fossy" \
+          -e "FOSSOLOGY_DB_NAME=fossology" \
+          -e "FOSSOLOGY_DB_HOST=localhost" \
+          fossology/fossology \
+          fossology --upload-dir /fossology_input --analysis --report
+  
 
       - name: Save SPDX Report
         run: |
