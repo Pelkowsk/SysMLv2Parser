@@ -72,7 +72,7 @@ jobs:
           scancode -l --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
-      - name: Upload ScanCode Reports
+      - name: Upload ScanCode Toolkit Reports
         uses: actions/upload-artifact@v4
         with:
           name: scancode-report-${{ env.TIMESTAMP }}
