@@ -1,53 +1,35 @@
-name: License Compliance with FOSSology
+name: Fossology License Scan
 
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  fossology-scan:
-    name: Run FOSSology Scan
+  fossology:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_USER: fossy
-          POSTGRES_PASSWORD: fossy
-          POSTGRES_DB: fossology
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U fossy -d fossology"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
+    container:
+      image: fossology/fossology:scanner
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Run FOSSology Docker Container
+      - name: Run Fossology Scanner
         run: |
-          docker run --rm \
-         --network host \
-          -e "FOSSOLOGY_DB_USER=fossy" \
-          -e "FOSSOLOGY_DB_PASSWORD=fossy" \
-          -e "FOSSOLOGY_DB_NAME=fossology" \
-          -e "FOSSOLOGY_DB_HOST=localhost" \
-          fossology/fossology \
-          fossology --upload-dir /fossology_input --analysis --report
-  
+          mkdir -p ./results
+          /bin/fossologyscanner repo nomos ojo copyright keyword -o ./results
 
-      - name: Save SPDX Report
-        run: |
-          mkdir -p reports
-          mv ${{ github.workspace }}/spdx2/* reports/
-
-      - name: Upload SPDX Report
+      - name: Upload Scan Results
         uses: actions/upload-artifact@v4
         with:
-          name: fossology-spdx-report
-          path: reports/
+          name: scan-result
+          path: ./results
+
+      - name: Download Scan Results (Optional)
+        if: always()
+        uses: actions/download-artifact@v3
+        with:
+          name: scan-result
