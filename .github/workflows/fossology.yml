@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fossology/fossology:scanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_PULL_REQUEST: ${{ github.event.pull_request.number }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Set GitHub Token
-        run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
 
       - name: Run Fossology Scanner
