@@ -17,6 +17,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_PULL_REQUEST: ${{ github.event.number || '0' }}
         GITHUB_REPO_OWNER: ${{ github.repository_owner }}
+        GITHUB_REPO_URL: https://github.com/${{ github.repository }}
 
     steps:
       - uses: actions/checkout@v4
