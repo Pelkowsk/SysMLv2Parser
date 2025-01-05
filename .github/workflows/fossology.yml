@@ -15,7 +15,7 @@ jobs:
       image: fossology/fossology:scanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_PULL_REQUEST: ${{ github.event.pull_request.number }}
+        GITHUB_PULL_REQUEST: ${{ github.event.number || '0' }}
 
     steps:
       - uses: actions/checkout@v4
