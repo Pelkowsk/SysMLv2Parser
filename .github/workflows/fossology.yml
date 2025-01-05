@@ -20,7 +20,8 @@ jobs:
       - name: Run Fossology Scanner
         run: |
           mkdir -p ./results
-          /bin/fossologyscanner repo nomos ojo copyright keyword -o ./results
+          /bin/fossologyscanner repo nomos ojo copyright keyword > ./results/scan-report.txt
+
 
       - name: Upload Scan Results
         uses: actions/upload-artifact@v4
