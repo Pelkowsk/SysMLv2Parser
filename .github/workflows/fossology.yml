@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fossology/fossology:scanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_PULL_REQUEST: ${{ github.event.pull_request.number }}
 
     steps:
       - uses: actions/checkout@v4
