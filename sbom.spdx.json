@@ -3,7 +3,7 @@ SPDXVersion: SPDX-2.2
 DataLicense: CC0-1.0
 SPDXID: SPDXRef-DOCUMENT
 DocumentName: SPDX Document created by ScanCode Toolkit
-DocumentNamespace: http://spdx.org/spdxdocs/sysmlv2parser-f7f01121-2ce4-4963-a916-0b58a39b6862
+DocumentNamespace: http://spdx.org/spdxdocs/sysmlv2parser-bff1e347-4bfe-44e3-bad5-af478d635642
 DocumentComment: <text>Generated with ScanCode and provided on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. No content created from
 ScanCode should be considered or used as legal advice. Consult an Attorney
@@ -15,14 +15,14 @@ SPDX License List: 3.25</text>
 ## Creation Information
 LicenseListVersion: 3.25
 Creator: Tool: scancode-toolkit 32.3.0
-Created: 2025-01-05T00:32:12Z
+Created: 2025-01-05T00:49:15Z
 
 ## Package Information
 PackageName: sysmlv2parser
 SPDXID: SPDXRef-001
 PackageDownloadLocation: NOASSERTION
 FilesAnalyzed: true
-PackageVerificationCode: 5a1afa4cae88ef2a3fbbbc41a4918270670ae1ae
+PackageVerificationCode: ab23ecf6ae5490fa2c28d2e3b618c82b0983213c
 PackageLicenseConcluded: NOASSERTION
 PackageLicenseInfoFromFiles: APSL-2.0
 PackageLicenseInfoFromFiles: Apache-1.1
@@ -141,7 +141,7 @@ FileCopyrightText: NONE
 ## File Information
 FileName: ./SysMLv2Parser/sbom.spdx.json
 SPDXID: SPDXRef-10
-FileChecksum: SHA1: 4e293a3af3cd6368912a5bc7ed92b66c7de8c6cd
+FileChecksum: SHA1: e9f01cc4bfbaa9c484273e7bce8376bfc9190ac0
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: CC0-1.0
 LicenseInfoInFile: LicenseRef-scancode-scancode-acknowledgment
@@ -425,6 +425,7 @@ Copyright (c) 2019 Mgnite Inc.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019-2023 Mgnite Inc.
 Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2024-2025 RPTU Kaiserslautern
 Copyright (c) 2024-2025 Your Organization
 Copyright 2015 the original author or authors
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
@@ -440,34 +441,7 @@ Copyright (c) 2018-2024 Model Driven Solutions, Inc.
 Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019-2023 Mgnite Inc.
-Copyright (c) 2024-2025 Your Organization
-Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
-Copyright (c) 2015-2021 the original
-Copyright (c) 2015-2021 the original </text>
-Copyright (c) 2018 IncQuery Labs Ltd.
-Copyright (c) 2018-2024 IncQuery Labs Ltd.
-Copyright (c) 2018-2024 Model Driven Solutions, Inc.
-Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
-Copyright (c) 2019 Mgnite Inc.
-Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
-Copyright (c) 2019-2023 Mgnite Inc.
-Copyright (c) 2024 Dein Name / Deine Organisation
-Copyright (c) 2024-2025 Your Organization
-Copyright 2015 the original author or authors
-Copyright (c) 2018-2024 Model Driven Solutions, Inc.
-Copyright (c) 2018-2024 IncQuery Labs Ltd.
-Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
-Copyright (c) 2019-2023 Mgnite Inc.
-Copyright (c) 2024-2025 Your Organization
-Copyright (c) 2015-2021 the original </text>
-Copyright 2015 the original author or authors
-Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
-Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
-Copyright (c) 2018-2024 Model Driven Solutions, Inc.
-Copyright (c) 2018-2024 IncQuery Labs Ltd.
-Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
-Copyright (c) 2019-2023 Mgnite Inc.
-Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2024-2025 RPTU Kaiserslautern
 Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
 Copyright (c) 2015-2021 the original
 Copyright (c) 2015-2021 the original </text>
@@ -603,6 +577,60 @@ Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019-2023 Mgnite Inc.
 Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2015-2021 the original
+Copyright (c) 2015-2021 the original </text>
+Copyright (c) 2018 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019 Mgnite Inc.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2024-2025 Your Organization
+Copyright 2015 the original author or authors
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2015-2021 the original </text>
+Copyright 2015 the original author or authors
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2015-2021 the original
+Copyright (c) 2015-2021 the original </text>
+Copyright (c) 2018 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2019 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019 Mgnite Inc.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024 Dein Name / Deine Organisation
+Copyright (c) 2024-2025 Your Organization
+Copyright 2015 the original author or authors
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2015-2021 the original </text>
+Copyright 2015 the original author or authors
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2007 Free Software Foundation, Inc. https://fsf.org
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
 Copyright (c) 2015-2021 the original
 Copyright (c) 2015-2021 the original </text>
 Copyright (c) 2018 IncQuery Labs Ltd.
@@ -1705,6 +1733,31 @@ Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
 Copyright (c) 2019-2023 Mgnite Inc.
 Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 RPTU Kaiserslautern
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 Your Organization
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 RPTU Kaiserslautern
+Copyright (c) 2018-2024 Model Driven Solutions, Inc.
+Copyright (c) 2018-2024 IncQuery Labs Ltd.
+Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
+Copyright (c) 2019-2023 Mgnite Inc.
+Copyright (c) 2024-2025 RPTU Kaiserslautern
 Copyright (c) 2018-2024 Model Driven Solutions, Inc.
 Copyright (c) 2018-2024 IncQuery Labs Ltd.
 Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
@@ -1962,8 +2015,16 @@ LicenseInfoInFile: NONE
 FileCopyrightText: NONE
 
 ## File Information
+FileName: ./SysMLv2Parser/.github/workflows/Scancode.yml
+SPDXID: SPDXRef-16
+FileChecksum: SHA1: 4bcdb690921603b994bbbd5a377e3dfbdc23fe3f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: NONE
+
+## File Information
 FileName: ./SysMLv2Parser/.idea/ANTLRv4ToolGrammarProperties.xml
-SPDXID: SPDXRef-17
+SPDXID: SPDXRef-18
 FileChecksum: SHA1: 0109cc6eb0f736ae9071573e7711c8a92f7c43db
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -1971,7 +2032,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/.idea/gradle.xml
-SPDXID: SPDXRef-18
+SPDXID: SPDXRef-19
 FileChecksum: SHA1: 6b31902834a17a0a3cacfa56056f5ff6b7a78fec
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -1979,7 +2040,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/.idea/misc.xml
-SPDXID: SPDXRef-19
+SPDXID: SPDXRef-20
 FileChecksum: SHA1: 8a22499c184c46c96cd270f0f2cc4053008bee66
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -1987,7 +2048,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/.idea/uiDesigner.xml
-SPDXID: SPDXRef-20
+SPDXID: SPDXRef-21
 FileChecksum: SHA1: 47c0ade20214f1dfce789c3c99fa4e427533748f
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -1995,7 +2056,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/.idea/vcs.xml
-SPDXID: SPDXRef-21
+SPDXID: SPDXRef-22
 FileChecksum: SHA1: c92f3eb0ad1c70371e177a4d7d741f90af3f902c
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -2003,7 +2064,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/gradle/wrapper/gradle-wrapper.jar
-SPDXID: SPDXRef-24
+SPDXID: SPDXRef-25
 FileChecksum: SHA1: 251364b90b8f139c16eb5d5ce376dfa697cba6cd
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -2011,7 +2072,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/gradle/wrapper/gradle-wrapper.properties
-SPDXID: SPDXRef-25
+SPDXID: SPDXRef-26
 FileChecksum: SHA1: 61362c54ea84b1c5aa59ae2bfcebeba3966d8694
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: NONE
@@ -2019,7 +2080,7 @@ FileCopyrightText: NONE
 
 ## File Information
 FileName: ./SysMLv2Parser/scripts/license_check.py
-SPDXID: SPDXRef-27
+SPDXID: SPDXRef-28
 FileChecksum: SHA1: 940688dc559878c9c2b5cd0ffc6a39cff67dcd0f
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: GPL-2.0-or-later
@@ -2049,7 +2110,7 @@ Copyright (c) 2024-2025 RPTU Kaiserslautern
 
 ## File Information
 FileName: ./SysMLv2Parser/src/main/antlr/example.g4
-SPDXID: SPDXRef-31
+SPDXID: SPDXRef-32
 FileChecksum: SHA1: 635a581f7ebcc13856bd8d12697e1854e4b5942e
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
@@ -2067,7 +2128,7 @@ Copyright (c) 2024-2025 RPTU Kaiserslautern
 
 ## File Information
 FileName: ./SysMLv2Parser/src/test/java/org/example/GrammarTest.java
-SPDXID: SPDXRef-36
+SPDXID: SPDXRef-37
 FileChecksum: SHA1: 0f8ca3e9dcec10d087f094c872e9fd88cbb3c9c9
 LicenseConcluded: NOASSERTION
 LicenseInfoInFile: LGPL-3.0-or-later
