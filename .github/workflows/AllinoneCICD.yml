@@ -1,9 +1,16 @@
+  #/*
+  #  * Copyright (c) 2023 John Doe
+  #  *
+  #  * This software is licensed under the MIT License.
+  #  * See the LICENSE file provided with this code.
+  #  */
+
 name: CI/CDPipeline
 
 on:
   push:
     branches:
-      - develop
+      - master
     paths-ignore:
       - sbom.spdx.json
   pull_request:
@@ -72,7 +79,7 @@ jobs:
           scancode -l --json-pp "scancode_results.json" $GITHUB_WORKSPACE/temp_g4_files/
         shell: bash
 
-      - name: Upload ScanCode Reports
+      - name: Upload ScanCode Toolkit Reports
         uses: actions/upload-artifact@v4
         with:
           name: scancode-report-${{ env.TIMESTAMP }}
@@ -85,11 +92,11 @@ jobs:
           echo "G4_FILES_LIST=$GITHUB_WORKSPACE/g4_files.txt" >> $GITHUB_ENV
 
 
-      - name: Create Scancode_Results Directory
+      - name: Create ScanCode_Results Directory
         run: mkdir -p $GITHUB_WORKSPACE/scancode_results
 
 
-      - name: Move ScanCode Report to Scancode_Results Directory
+      - name: Move ScanCode Report to ScanCode_Results Directory
         run: mv $GITHUB_WORKSPACE/scancode_results.json $GITHUB_WORKSPACE/scancode_results/
 
 

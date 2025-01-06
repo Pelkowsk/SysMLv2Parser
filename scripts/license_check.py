@@ -1,6 +1,13 @@
 import os
 import sys
 import json
+"""/*
+* Copyright (c) 2025 Jan Pelkowski
+*
+* This software is licensed under the MIT License.
+* See the LICENSE file provided with this code.
+*/"""
+
 
 # List of prohibited licenses
 PROHIBITED_LICENSES = {license.casefold() for license in {
@@ -139,8 +146,9 @@ def write_report(prohibited_files, missing_headers, output_report_path):
     :param output_report_path: path to report file.
     """
     report = {
-        "These files contain prohibited licenses": prohibited_files,
-        "These files do not contain the project license header; please insert missing headers in": missing_headers,
+        "The following prohibited licenses were found": prohibited_files,
+        "These files do not contain the project license header;" 
+        "please insert missing headers in": missing_headers,
         "status": "success" if not prohibited_files and not missing_headers else "failure"
     }
 
@@ -174,7 +182,7 @@ def main():
 
     # set up report
     report = {
-        "These files contain prohibited licenses": prohibited_files,
+        "The following prohibited licenses were found": prohibited_files,
         "These files do not contain the project license header; please insert missing headers in": header_missing_files,
         "status": "success" if not prohibited_files and not header_missing_files else "failure"
     }
