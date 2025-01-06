@@ -1,6 +1,13 @@
 import os
 import sys
 import json
+"""/*
+* Copyright (c) 2025 Jan Pelkowski
+*
+* This software is licensed under the MIT License.
+* See the LICENSE file provided with this code.
+*/"""
+
 
 # List of prohibited licenses
 PROHIBITED_LICENSES = {license.casefold() for license in {

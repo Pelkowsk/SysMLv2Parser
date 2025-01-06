@@ -1,0 +1,18 @@
+//include license text in generated files
+@header {
+/*****************************************************************************
+ * This file contains classes automatically generated from the SysML 2 grammar.
+ * Copyright (c) 2024-2025 RPTU Kaiserslautern
+ *
+ * This code is based on the SysML 2 Pilot Implementation and adheres to the
+ * terms of the GNU Lesser General Public License version 3 or later.
+ *
+ * The original license header of the SysML 2 Pilot Implementation can be found
+ * at: <URL to the original license header or repository>.
+ *
+ * Note: This header is intentionally different from the official project license
+ * header to enable custom compliance checks.
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ *****************************************************************************/
+}
