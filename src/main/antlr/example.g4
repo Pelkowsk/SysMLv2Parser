@@ -26,7 +26,7 @@
  *  Zoltan Kiss, IncQuery
  *  Balazs Grill, IncQuery
  *  Hisashi Miyashita, Maplesoft/Mgnite
- *  "GPL-2.0-only"
+ *
  *****************************************************************************/
 
 
