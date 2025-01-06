@@ -4,7 +4,7 @@
  * Copyright (c) 2018-2024 IncQuery Labs Ltd.
  * Copyright (c) 2019-2023 Maplesoft (Waterloo Maple, Inc.)
  * Copyright (c) 2019-2023 Mgnite Inc.
- * Copyright (c) 2024-2025 [Your Organization]
+ * Copyright (c) 2024-2025 RPTU Kaiserslautern
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
